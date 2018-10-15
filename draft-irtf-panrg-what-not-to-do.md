@@ -221,10 +221,6 @@ There is no shame to having an idea included in this document. As shown in {{Les
 
 We may stand on the shoulders of giants, but most of those giants' Path Aware Networking ideas weren't deployed, either!
 
-## A Note for Contributors {#NoteForContributors}
-
-(Consider removing after this document is approved for publication, or re-write appropriately)
-
 Discussion of specific contributed experiences and this document in general should take place on the PANRG mailing list.
 
 ## A Note for the Editor 
@@ -275,8 +271,6 @@ Each Lesson Learned is tagged with one or more contributions that encountered th
 
 # Template for Contributions {#TemplateContributions}
 
-This document is being built collaboratively. To contribute your experience, please send a Github pull request to https://github.com/panrg/draft-dawkins-panrg-what-not-to-do. It is most convenient if contributors use the Contribution Template in {{TemplateContributions}}.
-
 There are many things that could be said about the Path Aware networking technologies that have been developed. For the purposes of this document, contributors are requested to provide
 
 - the name of a technology, including an abbreviation if one was used
@@ -284,6 +278,8 @@ There are many things that could be said about the Path Aware networking technol
 - a short description of the problem the technology was intended to solve
 - a short description of the reasons why the technology wasn't adopted
 - a short statement of the lessons that researchers can learn from our experience with this technology.
+
+This document is being built collaboratively. To contribute your experience, please send a Github pull request to https://github.com/panrg/draft-irtf-panrg-what-not-to-do.
 
 # Contributions {#Contributions}
 
