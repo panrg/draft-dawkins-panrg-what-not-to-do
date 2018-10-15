@@ -1,7 +1,7 @@
 ---
 title: "Path Aware Networking: Obstacles to Deployment (A Bestiary of Roads Not Taken)"
 abbrev: What Not To Do
-docname: draft-dawkins-panrg-what-not-to-do-02
+docname: draft-irtf-panrg-what-not-to-do-00
 date: 
 category: info
 submissiontype: IRTF
