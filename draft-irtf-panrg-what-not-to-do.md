@@ -279,7 +279,7 @@ There are many things that could be said about the Path Aware networking technol
 - a short description of the reasons why the technology wasn't adopted
 - a short statement of the lessons that researchers can learn from our experience with this technology.
 
-This document is being built collaboratively. To contribute your experience, please send a Github pull request to https://github.com/panrg/draft-irtf-panrg-what-not-to-do.
+This document is being built collaboratively. To contribute your experience, please send a Github pull request to https://github.com/panrg/draft-dawkins-panrg-what-not-to-do.
 
 # Contributions {#Contributions}
 
