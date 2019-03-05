@@ -1,7 +1,7 @@
 ---
 title: "Path Aware Networking: Obstacles to Deployment (A Bestiary of Roads Not Taken)"
 abbrev: What Not To Do
-docname: draft-irtf-panrg-what-not-to-do-00
+docname: draft-irtf-panrg-what-not-to-do-01
 date: 
 category: info
 submissiontype: IRTF
@@ -27,17 +27,29 @@ author:
   -
     ins: S. Dawkins
     name: Spencer Dawkins
-    organization: Huawei Technologies
+    organization: Wonder Hamster Internetworking
     email: spencerdawkins.ietf@gmail.com
     role: editor
 
 informative:
 
+  RFC0792:
+  
   RFC0793:
+  
+  RFC1016:
+
+  RFC1190:
   
   RFC1633:
   
+  RFC1809:
+  
+  RFC1819:
+  
   RFC1887:
+
+  RFC2001:
   
   RFC2205: 
   
@@ -52,17 +64,27 @@ informative:
   RFC2475:
 
   RFC2581:
+
+  RFC3168:
+
+  RFC3697:
   
   RFC4094: 
+
+  RFC4443:
   
   RFC4782:
   
-  RFC2960:
-  
+  RFC5082:
+
   RFC5218:
   
   RFC5533:
   
+  RFC5575:
+
+  RFC5634:
+
   RFC5681:
   
   RFC5971:
@@ -75,18 +97,47 @@ informative:
   
   RFC5974:
   
+  RFC6294:
+  
   RFC6398:
+
+  RFC6437:
+  
+  RFC6438:
+  
+  RFC6633:
   
   RFC6928:
-  
-  RFC6951:
 
   RFC7305:
   
   RFC7418:
   
+  RFC8085:
+  
   RFC8170:
 
+  Colossal-Cave:
+    target: https://en.wikipedia.org/wiki/Colossal_Cave_Adventure
+    title: "Wikipedia Page for Colossal Cave Adventure"
+    date: Retrieved January 2019
+
+  IEN-119: 
+    title: "ST - A Proposed Internet Stream Protocol" 
+    target: https://www.rfc-editor.org/ien/ien119.txt
+    author: 
+      ins: J. Forgie 
+      name: James W. Forgie
+    date: September 1979
+
+  GREASE: 
+    title: "Long-term Viability of Protocol Extension Mechanisms" 
+    target: https://tools.ietf.org/html/draft-thomson-use-it-or-lose-it-03
+    author: 
+      ins: M. Thomson 
+      name: Martin Thomson
+    date: January 2019
+    
   ITAT:
     target: https://www.iab.org/activities/workshops/itat/
     title: "IAB Workshop on Internet Technology Adoption and Transition (ITAT)"
@@ -111,6 +162,11 @@ informative:
     title: "Path Aware Networking Research Group - IETF-99"
     date: July 2017
 
+  PANRG-103-Min:
+    target: https://datatracker.ietf.org/doc/minutes-103-panrg/
+    title: "Path Aware Networking Research Group - IETF-103 Minutes"
+    date: November 2018 
+
   PATH-Decade:
     target: https://datatracker.ietf.org/doc/slides-99-panrg-a-decade-of-path-awareness/
     title: "A Decade of Path Awareness"
@@ -122,6 +178,31 @@ informative:
   PANRG:
     target: https://irtf.org/panrg
     title: "Path Aware Networking Research Group (Home Page)"
+
+  QS-SAT:
+    target: https://dl.acm.org/citation.cfm?id=3160304.3160305
+    title: "Using Quick-Start to enhance TCP-friendly rate control performance in bidirectional satellite networks"
+    author: 
+      - 
+        name: Raffaello Secchi
+        ins: R. Secchi
+      - 
+        name: Arjuna Sathiaseelan
+        ins: A. Sathiaseelan        
+      - 
+        name: Francesco Potortì
+        ins: F. Potortì     
+      - 
+        name: Alberto Gotta
+        ins: A. Gotta   
+      - 
+        name: Gorry Fairhurst
+        ins: G. Fairhurst
+    date: 2009
+        
+  QUIC-WG:
+    target: https://datatracker.ietf.org/wg/quic/about/
+    title: "QUIC Working Group Home Page"
 
   SAF07: 
     author: 
@@ -167,6 +248,10 @@ informative:
       "NANOG": "North American Network Operator Group"
     date: October 2005
     target: https://www.youtube.com/watch?v=ji6Y_rYHAQs
+
+  TAPS-WG:
+    target: https://datatracker.ietf.org/wg/taps/about/
+    title: "Transport Services Working Group Home Page"
  
   TRIGTRAN-55:
     target: https://www.ietf.org/proceedings/55/239.htm 
@@ -180,48 +265,52 @@ informative:
  
 --- abstract
 
-At the first meeting of the Path Aware Networking Research Group, Oliver Bonaventure led a discussion of 
-mostly-unsuccessful attempts to exploit Path Awareness to achieve a variety of goals, for a variety of reasons, 
-over the past decade. 
-At the end of that discussion,
-the research group agreed to catalog and analyze these ideas, 
-in order to extract insights and lessons for path-aware networking researchers.
+At the first meeting of the Path Aware Networking Research Group, the research group agreed to catalog and analyze past efforts to develop and deploy  Path Aware technologies, most of which were unsuccessful, in order to extract insights and lessons for path-aware networking researchers.
 
 This document contains that catalog and analysis.
 
 --- middle
 # Introduction
 
-At IETF 99, the Path Aware Networking Research Group {{PANRG}} held its first meeting {{PANRG-99}}, and the first presentation 
-in that session was "A Decade of Path Awareness" {{PATH-Decade}}. At the end of this discussion, two things were 
-abundantly clear. 
+At the first meeting of the Path Aware Networking Research Group {{PANRG}}, at IETF 99 {{PANRG-99}}, Oliver Bonaventure led a discussion of "A Decade of Path Awareness" {{PATH-Decade}}, on attempts, which were mostly unsuccessful for a variety of reasons, to exploit Path Aware technologies and achieve a variety of goals
+ over the past decade. At the end of this discussion, two things were abundantly clear. 
 
-- The Internet community has accumulated considerable experience with many Path Awareness ideas over a long period 
+- The Internet community has accumulated considerable experience with many Path Aware technologies over a long period 
 of time, and
 
-- Although some Path Awareness ideas have been successfully deployed (for example, Differentiated Services, or 
-DiffServ {{RFC2475}}), most of these ideas haven't seen widespread adoption. The reasons for non-adoption are many, and are worthy of study.
+- Although some Path Aware technologies have been successfully deployed (for example, Differentiated Services, or 
+DiffServ {{RFC2475}}), most of these technologies haven't seen widespread adoption. The reasons for non-adoption are many, and are worthy of study.
 
 The meta-lessons from that experience were
 
-- Path Aware Networking is more Research than Engineering, so establishing an IRTF Research Group for Path Aware Networking 
+- Path Aware Networking has been more Research than Engineering, so establishing an IRTF Research Group for Path Aware Networking 
 is the right thing to do {{RFC7418}}.
 
 - Analyzing a catalog of past experience to learn the reasons for non-adoption would be a great first step for the Research Group.
 
-Allison Mankin, the IRTF Chair, officially chartered the Path Aware Networking Research Group in July, 2018. 
+Allison Mankin, as IRTF Chair, officially chartered the Path Aware Networking Research Group in July, 2018. 
 
 This document contains the analysis performed by that research group (see {{LessonsLearned}}), based on that catalog (see {{Contributions}}). 
 
-## About this Document
+## A Note About Path-Aware Technologies Included In This Document
 
-This document is not intended to catalog every idea about Path Aware Networking that we can find. Instead, we include enough ideas to provide background for new lessons to guide researchers in their work, in order to add those lessons to {{LessonsLearned}}.
+This document does not catalog every technology about Path Aware Networking that was not implemented and deployed. Instead, we include enough technologies to provide background for the lessons included in {{LessonsLearned}} to guide researchers and protocol engineers in their work.
 
-There is no shame to having an idea included in this document. As shown in {{LessonsLearned}}, the quality of specific proposals had little to do with whether they were deployed or not. The first contribution added to this document was for a proposal from the editor of this document {{TRIGTRAN}}, and it wasn't deployed. When these proposals were made, the proponents were trying to engineer something when they should have been trying to research it. Actual shame would be failing to learn from experience, and failing to share that experience with other networking researchers and engineers.
+No shame is intended for the technologies included in this document. As shown in {{LessonsLearned}}, the quality of specific technologies had little to do with whether they were deployed or not. Based on the technologies cataloged in this document, it is likely that when these technologies were put forward, the proponents were trying to engineer something that could not be engineered without first carrying out research. Actual shame would be failing to learn from experience, and failing to share that experience with other networking researchers and engineers.
 
-We may stand on the shoulders of giants, but most of those giants' Path Aware Networking ideas weren't deployed, either!
+## Venue for Discussion of this Document
+
+(RFC Editor: please remove this section before publication)
 
 Discussion of specific contributed experiences and this document in general should take place on the PANRG mailing list.
+
+## A Note for the Research Group
+
+(RFC Editor: please remove this section before publication)
+
+The editor and research group chairs are aware that the current version of this document is tilted toward transport-level Path Aware technologies, and would like to interact with other IETF  protocol communities who have experience with Path Aware technologies. 
+
+It is worth looking at the Lessons Learned in {{LessonsLearned}} to see whether the Internet has changed in ways that would make some lessons less applicable for future protocol design. 
 
 ## A Note for the Editor 
 
@@ -239,7 +328,7 @@ The to-do list for upcoming revisions includes
 
 As background for understanding the Lessons Learned contained in this document, the reader is encouraged to become familiar with the Internet Architecture Board's documents on "What Makes for a Successful Protocol?" {{RFC5218}} and "Planning for Protocol Adoption and Subsequent Transitions" {{RFC8170}}.
 
-Although these two documents do not specifically target path-aware networking protocols, they are helpful resources on successful protocol adoption and deployment.
+Although these two documents do not specifically target path-aware networking protocols, they are helpful resources for readers seeing to improve their understanding of successful protocol adoption and deployment.
 
 Because there is an economic aspect to decisions about deployment, the IAB Workshop on Internet Technology Adoption and Transition {{ITAT}} report {{RFC7305}} also provides food for thought.
 
@@ -249,25 +338,27 @@ This section summarizes the Lessons Learned from the contributed sections in {{C
 
 Each Lesson Learned is tagged with one or more contributions that encountered this obstacle as a significant impediment to deployment. Other contributed technologies may have also encountered this obstacle, but this obstacle may not have been the biggest impediment to deployment. 
 
-- The benefit of Path Awareness has to be great enough to overcome entropy for already-deployed devices. The colloquial American English expression, "If it ain't broke, don't fix it" is a "best current practice" on today's Internet. (See {{Quick-Start}} and {{TRIGTRAN}}).
+- The benefit of Path Awareness must be great enough to overcome entropy for already-deployed devices. The colloquial American English expression, "If it ain't broke, don't fix it" is a "best current practice" on today's Internet. (See {{Quick-Start}}, {{TRIGTRAN}}, and {{Source-Quench}}).
 
-- Providing benefits for early adopters is key - if everyone must deploy a technology in order for the topology to provide benefits, or even to work at all, the technology is unlikely to be adopted. (See {{IntServ}} and {{Quick-Start}}).
+- Providing benefits for early adopters can be key - if everyone must deploy a technology in order for the technology to provide benefits, or even to work at all, the technology is unlikely to be adopted. (See {{IntServ}} and {{Quick-Start}}).
 
-- "Follow the money." If operators can't charge for a Path Aware technology in order to recover the costs of deploying it, the benefits to the operator must be really significant. (See {{TRIGTRAN}}).
+- Adaptive end-to-end protocol mechanisms may respond to feedback quickly enough that the additional realizable benefit from a new Path Aware mechanism may be much smaller than anticipated (see {{Quick-Start}} and {{TRIGTRAN}}). 
 
-- Impact of a Path Aware technology on operational practices can prevent deployment of promising technology. (See {{Shim6}}).
+- "Follow the money." If operators can't charge for a Path Aware technology to recover the costs of deploying it, the benefits to the operator must be really significant. (See {{TRIGTRAN}}, {{ST2}}, and {{IntServ}}).
 
-- Per-connection state in intermediate devices is an impediment to adoption and deployment. (See {{IntServ}}).
+- Impact of a Path Aware technology requiring changes to operational practices can prevent deployment of promising technology. (See {{Shim6}}, including {{Addendum-MP-TCP}}).
 
-- Modern routers aren't designed to make heavy use of in-band signaling using mechanisms such as IPv4 and IPv6 Router Alert Options (RAO), so operators are reluctant to deploy technologies that rely on these signals. (See {{NSIS}}).
+- Per-connection state in intermediate devices can be an impediment to adoption and deployment. (See {{ST2}} and {{IntServ}}).
 
-- If endpoints can't be trusted, operators are reluctant to deploy technologies that rely on endpoints sending unauthenticated control signals to routers. (See {{NSIS}}).
+- Many modern routers, especially high-end routers, have not been designed to make heavy use of in-band mechanisms such as IPv4 and IPv6 Router Alert Options (RAO), so operators can be reluctant to deploy technologies that rely on these mechanisms. (See {{NSIS}}).
 
-- If intermediate devices along the path can't be trusted, it's unlikely that endpoints will rely on signals from intermediate devices to drive changes to endpoint behaviors. (See {{TRIGTRAN}}).
+- If the endpoints do not have any trust relationship with the intermediate devices along a path, operators can be reluctant to deploy technologies that rely on endpoints sending unauthenticated control signals to routers. (See {{IntServ}} and {{NSIS}}. We also note this still remains a factor hindering deployment of DiffServ).
 
-- The Internet is a distributed system, so the more a technology relies on information propagated from distant hosts and routers, the less likely that information is to be accurate. (See {{Quick-Start}}).
+-  If intermediate devices along the path can't be trusted, it's unlikely that endpoints will rely on signals from intermediate devices to drive changes to endpoint behaviors. (See {{TRIGTRAN}}, {{Source-Quench}}). The lowest level of trust is sufficient for a device issuing a message to confirm that it has visibility of the packets the path it is seeking to control {{RFC8085}} (e.g., an ICMP message included a quoted packet from the source). A higher level of trust can arise when a network device could have a long or short term trust relationship with the sender it controls.
 
-- Transport protocol technologies may require information from applications, in order to work effectively, but applications may not know the information they need to provide. (See {{Quick-Start}}).
+- Because the Internet is a distributed system, if the distance that information from distant hosts and routers travels to a Path Aware host or router is sufficiently large, the information may no longer represent the state and situation at the distant host or router when it is received. In this case, the benefit that a Path Aware technology provides likely decreases. (See {{Quick-Start}}).
+
+- Providing a new feature/signal does not mean that it will be used. Endpoint stacks may not know how to effectively utilize Path-Aware transport protocol technologies, because the technology may require information from applications to permit them to work effectively, but applications may not a-priori know that information. Even if the application does know that information, the de-facto API has no way of signaling the expectations of applications for the network path. Providing this awareness requires an API that signals more than the packets to be sent. TAPS is exploring such an API {{TAPS-WG}}, yet even with such an API, policy is needed to bind the application expectations to the network characteristics. (See {{ST2}} and {{IntServ}}).
 
 # Template for Contributions {#TemplateContributions}
 
@@ -285,6 +376,32 @@ This document is being built collaboratively. To contribute your experience, ple
 
 Additional contributions that provide Lessons Learned beyond those already captured in {{LessonsLearned}} are welcomed. 
 
+## Stream Transport (ST, ST2, ST2+) {#ST2}
+
+The suggested references for IntServ are:
+
+- ST - A Proposed Internet Stream Protocol {{IEN-119}}
+- Experimental Internet Stream Protocol, Version 2 (ST-II) {{RFC1190}}
+- Internet Stream Protocol Version 2 (ST2) Protocol Specification - Version ST2+ {{RFC1819}}
+
+The first version of Stream Transport, ST {{IEN-119}}, was published in the late 1970's and was implemented and deployed on the ARPANET at small scale. It was used throughout the 1980's for experimental transmission of voice, video, and distributed simulation. 
+
+The second version of the ST specification (ST2) {{RFC1190}} {{RFC1819}} was an experimental connection-oriented internetworking protocol that operated at the same layer as connectionless IP. ST2 packets could be distinguished by their IP header protocol numbers (IP, at that time, used protocol number 4, while ST2 used protocol number 5). 
+
+ST2 used a control plane layered over IP to select routes and reserve capacity for real-time streams across a network path, based on a flow specification communicated by a separate protocol. The flow specification could be associated with QoS state in routers, producing an experimental resource reservation protocol. This allowed ST2 routers along a path to offer end-to-end guarantees, primarily to satisfy the QoS requirements for realtime services over the Internet. 
+
+### Reasons for Non-deployment 
+
+Although implemented in a range of equipment, ST2 was not widely used after completion of the experiments.  It did not offer the scalability and fate-sharing properties that have come to be desired by the Internet community.
+
+The ST2 protocol is no longer in use.
+
+### Lessons Learned.
+
+As time passed, the trade-off between router processing and link capacity changed. Links became faster and the cost of router processing became comparatively more expensive. 
+
+The ST2 control protocol used "hard state" - once a route was established, and resources were reserved, routes and resources existing until they were explicitly released via signaling. A soft-state approach was thought superior to this hard-state approach, and led to development of the IntServ model described in {{IntServ}}.
+ 
 ## Integrated Services (IntServ) {#IntServ}
 
 The suggested references for IntServ are:
@@ -295,60 +412,96 @@ The suggested references for IntServ are:
 - RFC 2215 General Characterization Parameters for Integrated Service Network Elements {{RFC2215}}
 - RFC 2205 Resource ReSerVation Protocol (RSVP) {{RFC2205}}
 
-In 1994, when the IntServ architecture document {{RFC1633}} was published, real-time traffic was first appearing on the Internet. At that time, bandwidth was a scarce commodity. Internet Service Providers built networks over DS3 (45 Mbps) infrastructure, and sub-rate (< 1 Mpbs) access was common. Therefore, the IETF anticipated a need for a fine-grained QoS mechanism.
+In 1994, when the IntServ architecture document {{RFC1633}} was published, real-time traffic was first appearing on the Internet. At that time, bandwidth was still a scarce commodity. Internet Service Providers built networks over DS3 (45 Mbps) infrastructure, and sub-rate (< 1 Mpbs) access was common. Therefore, the IETF anticipated a need for a fine-grained QoS mechanism.
 
-In the IntServ architecture, some  applications require service guarantees. Therefore, those applications use the Resource Reservation Protocol (RSVP) {{RFC2205}} to signal  bandwidth reservations across the network.  Every router in the network maintains per-flow state in order to a) perform call admission control and b) deliver guaranteed service.
+In the IntServ architecture, some  applications can require service guarantees. Therefore, those applications use the Resource Reservation Protocol (RSVP) {{RFC2205}} to signal  QoS  reservations across network paths.  Every router in the network maintains per-flow soft-state to a) perform call admission control and b) deliver guaranteed service.
 
-Applications use Flow Specification (Flow Specs) {{RFC2210}} to describe the traffic that they emit. RSVP reserves bandwidth for traffic on a per Flow Spec basis.
+Applications use Flow Specification (Flow Specs) {{RFC2210}} to describe the traffic that they emit. RSVP reserves capacity for traffic on a per Flow Spec basis.
 
 ### Reasons for Non-deployment 
 
-IntServ was never widely deployed because of its cost. The following factors contributed to cost:
+Although IntServ has been used in enterprise and government networks, IntServ was never widely deployed on the Internet because of its cost. The following factors contributed to operational cost:
 
-- IntServ must be deployed on every router within the QoS domain
+- IntServ must be deployed on every router on every router that is on a path where IntServ is to be used
 - IntServ maintained per flow state
 
 As IntServ was being discussed, the following occurred:
 
-- It became more cost effective to solve the QoS problem by adding bandwidth. Between 1994 and 2000, Internet Service Providers upgraded their infrastructures from DS3 (45 Mbps) to OC-48 (2.4 Gbps). This meant that even if an endpoint was using IntServ in an IntServ-enabled network, its requests would never be denied, so endpoints and Internet Service Providers had little reason to enable IntServ. 
+- For many expected uses, it became more cost effective to solve the QoS problem by adding bandwidth. Between 1994 and 2000, Internet Service Providers upgraded their infrastructures from DS3 (45 Mbps) to OC-48 (2.4 Gbps). This meant that even if an endpoint was using IntServ in an IntServ-enabled network, its requests would never be denied, so endpoints and Internet Service Providers had little reason to enable IntServ. 
 - DiffServ {{RFC2475}} offered a more cost-effective, albeit less fine-grained, solution to the QoS problem.
 
 ### Lessons Learned.
 
 The following lessons were learned:
 
-- Any mechanism that requires a router to maintain per-flow state is not likely to succeed.
-- Any mechanism that requires an operator to upgrade all of its routers is not likely to succeed.
+- Any mechanism that requires a router to maintain per-flow state is not likely to succeed, unless the additional cost for offering the feature can be  recovered from the user.
+- Any mechanism that requires an operator to upgrade all of its routers is not likely to succeed, unless the additional cost for offering the feature be  recovered from the user
 
-IntServ was never widely deployed. However, the technology that it produced was deployed for reasons other than bandwidth management. RSVP is widely deployed as an MPLS signaling mechanism. BGP uses Flow Specs to distribute firewall filters.
+In environments where IntServ has been deployed, trust relationships with endpoints are very different from trust relationships on the Internet itself, and there are often clearly-defined hierarchies in Service Level Agreements (SLAs), and well-defined transport flows operating with pre-determined capacity and latency requirements over paths where capacity or other attributes are constrained. 
+
+IntServ was never widely deployed to manage capacity across the Internet. However, the technology that it produced was deployed for reasons other than bandwidth management. RSVP is widely deployed as an MPLS signaling mechanism. BGP reuses the RSVP concept of Filter Specs to distribute firewall filters, although they are called Flow Spec Component Types in BGP {{RFC5575}}.
 
 ## Quick-Start TCP {#Quick-Start}
 
 The suggested references for Quick-Start TCP are:
 
 - RFC 4782 Quick-Start for TCP and IP {{RFC4782}}
-- Determining an appropriate sending rate over an underutilized network path {{SAF07}}
+- Determining an appropriate initial sending rate over an underutilized network path {{SAF07}}
 - Fast Startup Internet Congestion Control for Broadband Interactive Applications {{Sch11}}
+- RFC 5634 Quick-Start for the Datagram Congestion Control Protocol (DCCP) {{RFC5634}}
+- Using Quick-Start to enhance TCP-friendly rate control performance in bidirectional satellite networks {{QS-SAT}}
 
-Quick-Start {{RFC4782}} is an experimental TCP extension that leverages support from the routers on the path to determine an allowed sending rate, either at the start of data transfers or after idle periods. In these cases, a TCP sender cannot easily determine an appropriate sending rate, given the lack of information about the path. The default TCP congestion control therefore uses the time-consuming slow-start algorithm. With Quick-Start, connections are allowed to use higher sending rates if there is significant unused bandwidth along the path, and if the sender and all of the routers along the path approve the request. By examining Time To Live (TTL) fields, a sender can determine if all routers have approved the Quick-Start request. The protocol also includes a nonce that provides protection against cheating routers and receivers. If the Quick-Start request is explicitly approved by all routers along the path, the TCP host can send at up to the approved rate; otherwise TCP would use the default congestion control. Quick-Start requires modifications in the involved end-systems as well in routers. Due to the resulting deployment challenges, Quick-Start was only proposed in {{RFC4782}} for controlled environments.
+Quick-Start {{RFC4782}} is an Experimental TCP extension that leverages support from the routers on the path to determine an allowed initial sending rate for a path through the Internet, either at the start of data transfers or after idle periods. A corresponding mechanism was also specified for other congestion controllers (e.g., "Quick-Start for the Datagram Congestion Control Protocol (DCCP)" {{RFC5634}}). In these cases, a sender cannot easily determine an appropriate initial sending rate, given the lack of information about the path. The default TCP congestion control therefore uses the time-consuming slow-start algorithm. With Quick-Start, connections are allowed to use higher initial sending rates if there is significant unused bandwidth along the path, and if the sender and all of the routers along the path approve the request. 
 
-The Quick-Start protocol is a lightweight, coarse-grained, in-band, network-assisted fast startup mechanism. The benefits are studied by simulation in a research paper {{SAF07}} that complements the protocol specification. The study confirms that Quick-Start can significantly speed up mid-sized data transfers. That paper also presents router algorithms that do not require keeping per-flow state. Later studies {{Sch11}} comprehensively analyzes Quick-Start with a full Linux implementation and with a router fast path prototype using a network processor. In both cases, Quick-Start could be implemented with limited additional complexity. 
+By examining the Time To Live (TTL) field in Quick-Start packets, a sender can determine if  routers on the path have approved the Quick-Start request. However, this method is unable to take into account the routers hidden by tunnels or other network devices invisible at the IP layer.
+
+The protocol also includes a nonce that provides protection against cheating routers and receivers. If the Quick-Start request is explicitly approved by all routers along the path, the TCP host can send at up to the approved rate; otherwise TCP would use the default congestion control. Quick-Start requires modifications in the involved end-systems as well in routers. Due to the resulting deployment challenges, Quick-Start was only proposed in {{RFC4782}} for controlled environments.
+
+The Quick-Start mechanism is a lightweight, coarse-grained, in-band, network-assisted fast startup mechanism. The benefits are studied by simulation in a research paper {{SAF07}} that complements the protocol specification. The study confirms that Quick-Start can significantly speed up mid-sized data transfers. That paper also presents router algorithms that do not require keeping per-flow state. Later studies {{Sch11}} comprehensively analyzes Quick-Start with a full Linux implementation and with a router fast path prototype using a network processor. In both cases, Quick-Start could be implemented with limited additional complexity. 
 
 ### Reasons for Non-deployment 
 
-However, the experiments with Quick-Start in {{Sch11}} reveal several challenges:
+However, experiments with Quick-Start in {{Sch11}} revealed several challenges:
 
-* Having information from the routers along the path can reduce the risk of congestion, but cannot avoid it entirely. Determining whether there is unused capacity is not trivial in actual router and host implementations. Data about available bandwidth visible at the IP layer may be imprecise, and due to the propagation delay, information can already be outdated when it reaches the sender. There is a trade-off between the speedup of data transfers and the risk of congestion even with Quick-Start.
+* Having information from the routers along the path can reduce the risk of congestion, but cannot avoid it entirely. Determining whether there is unused capacity is not trivial in actual router and host implementations. Data about available capacity visible at the IP layer may be imprecise, and due to the propagation delay, information can already be outdated when it reaches a sender. There is a trade-off between the speedup of data transfers and the risk of congestion even with Quick-Start. This could be mitigated by only allowing Quick-Start to access a proportion of the unused capacity along a path.
 
 * For scalable router fast path implementation, it is important to enable parallel processing of packets, as this is a widely used method e.g. in network processors. One challenge is synchronization of information between different packets, which should be avoided as much as possible.
  
-* Only selected applications can benefit from Quick-Start. For achieving an overall benefit, it is important that senders avoid sending unnecessary Quick-Start requests, e.g. for connections that will only send a small amount of data. This typically requires application-internal knowledge. It is a mostly unsolved question how a sender can indeed determine the data rate that Quick-Start shall request for.
+ * Only some types of application traffic can benefit from Quick-Start. Capacity needs to be requested and discovered. The discovered capacity needs to be utilized by the flow, or it implicitly becomes available for other flows.  Failing to use the requested capacity may have already reduced the pool of Quick-Start capacity that was made available to other competing Quick-Start requests. The benefit is greatest when  senders use this only for bulk flows and avoid sending unnecessary Quick-Start requests, e.g. for flows that only send a small amount of data. Choosing an appropriate request size requires application-internal knowledge that is not commonly expressed by the transport API. How a sender can determine the rate for an initial Quick-Start request is still a largely unsolved problem.
 
-After completion of the Quick-Start specification, there have been large-scale experiments with an initial window of up to 10 MSS {{RFC6928}}. This alternative "IW10" approach can also ramp up data transfers faster than the standard TCP congestion control, but it only requires sender-side TCP modifications. As a result, this approach can be easier and incrementally deployed in the Internet. While theoretically Quick-Start can outperform "IW10", the absolute improvement of data transfer times is rather small in many cases. After publication of {{RFC6928}}, most modern TCP stacks have increased their default initial window. There is no known deployment of Quick-Start TCP.
+There is no known deployment of Quick-Start for TCP or other IETF transports.
 
 ### Lessons Learned
 
-There are some lessons learned from Quick-Start. Despite being a very light-weight protocol, Quick-Start suffers from poor incremental deployment properties, both regarding the required modifications in network infrastructure as well as its interactions with applications. Except for corner cases, congestion control can be quite efficiently performed end-to-end in the Internet, and in modern TCP stacks there is not much room for significant improvement by additional network support.
+Some lessons can be learned from Quick-Start. Despite being a very light-weight protocol, Quick-Start suffers from poor incremental deployment properties, both regarding the required modifications in network infrastructure as well as its interactions with applications. Except for corner cases, congestion control can be quite efficiently performed end-to-end in the Internet, and in modern stacks there is not much room for significant improvement by additional network support.
+
+After publication of the Quick-Start specification, there have been large-scale experiments with an initial window of up to 10 MSS {{RFC6928}}. This alternative "IW10" approach can also ramp-up data transfers faster than the standard congestion control, but it only requires sender-side modifications. As a result, this approach can be easier and incrementally deployed in the Internet. While theoretically Quick-Start can outperform "IW10", the improvement in completion time for data transfer times can, in many cases, be small. After publication of {{RFC6928}}, most modern TCP stacks have increased their default initial window. 
+
+## ICMP Source Quench {#Source-Quench}
+
+The suggested references for ICMP Source Quench are:
+
+- INTERNET CONTROL MESSAGE PROTOCOL {{RFC0792}}
+
+The ICMP Source Quench message {{RFC0792}} allowed an on-path router to request the source of a flow to reduce its sending rate. This method allowed a router to provide an early indication of impending congestion on a path to the sources that contribute to that congestion.  
+
+### Reasons for Non-deployment 
+
+This method was deployed in Internet routers over a period of time, the reaction of endpoints to receiving this signal has varied. For low speed links, with low multiplexing of flows the methods could be used to regulate (momentarily reduce) the transmission rate. However, the simple signal does not scale with link speed, or the number of flows sharing a link.
+
+The approach was overtaken by the evolution of congestion control methods in TCP {{RFC2001}}, and later also by other IETF transports. Because these methods were based upon measurement of the end-to-end path and an algorithm in the endpoint, they were able to evolve and mature more rapidly than methods relying on interactions between operational routers and endpoint stacks.
+
+After ICMP Source Quench was specified, the IETF began to recommend that transports provide end-to-end congestion control {{RFC2001}}. The Source Quench method has been obsoleted by the IETF {{RFC6633}}, and both hosts and routers must now silently discard this message.
+
+### Lessons Learned
+
+This method had several problems:
+
+First, {{RFC0792}} did not sufficiently specify how the sender would react to the ICMP Source Quench signal from the path (e.g., {{RFC1016}}). There was ambiguity in how the sender should utilize this additional information. This could lead to unfairness in the way that receivers (or routers) responded to this message. 
+
+Second, while message did provide additional information, the Explicit Congestion Notification (ECN) mechanism {{RFC3168}} provided a more robust and informative signal for network devices to provide early indication that a path has become congested.
+
+The mechanism originated at a time when the Internet trust model was very different. Most endpoint implementations did not attempt to verify that the message originated from an on-path device before they utilized the message. This made it vulnerable to denial of service attack.  In theory, routers might have chosen to use the quoted packet contained in the ICMP payload to validate that the message originated from an on-path device, but this would have increased per-packet processing overhead for each router along the path, would have required transport functionality in the router to verify whether the qu0ted packet headed corresponded to a packet the router had sent. In addition, section 5.2 of {{RFC4443}} noted ICMPv6-based attacks on hosts that would also have threatened routers processing ICMPv6 Source Quench payloads. As time passed, it became increasingly obvious that the lack of validation of the messages exposed receivers to a security vulnerability where the messages could be forged to create a tangible denial of service opportunity.
 
 ## Triggers for Transport (TRIGTRAN) {#TRIGTRAN}
 
@@ -357,21 +510,35 @@ The suggested references for TRIGTRAN are:
 - TRIGTRAN BOF at IETF 55 {{TRIGTRAN-55}}
 - TRIGTRAN BOF at IETF 56 {{TRIGTRAN-56}}
 
-TCP {{RFC0793}} has a well-known weakness - the end-to-end flow control mechanism has only a single signal, the loss of a segment, and semi-modern TCPs (since the late 1980s) have interpreted the loss of a segment as evidence that the path between two endpoints has become congested enough to exhaust buffers on intermediate hops, so that the TCP sender should "back off" - reduce its sending rate until it knows that its segments are now being delivered without loss {{RFC2581}}. More modern TCPs have added a growing array of strategies about how to establish the sending rate {{RFC5681}}, but when a path is no longer operational, TCPs can wait many seconds before retrying a segment, even if the path becomes operational while the sender is waiting for its next retry.
+TCP {{RFC0793}} has a well-known weakness - the end-to-end flow control mechanism has only a single signal, the loss of a segment, and TCP implementations since the late 1980s have interpreted the loss of a segment as evidence that the path between two endpoints may have become congested enough to exhaust buffers on intermediate hops, so that the TCP sender should "back off" - reduce its sending rate until it knows that its segments are now being delivered without loss {{RFC2581}}. More modern TCP stacks have added a growing array of strategies about how to establish the sending rate {{RFC5681}}, but when a path is no longer operational, TCP would continue to retry transmissions, which would fail, again, and double their Retransmission Time Out (RTO) timers with each failed transmission, with the result that TCP would wait many seconds before retrying a segment, even if the path becomes operational while the sender is waiting for its next retry.
 
-The thinking in Triggers for Transport was that if a path completely stopped working because its first-hop link was "down", that somehow TCP could be signaled when the first-hop link returned to service, and the sending TCP could retry immediately, without waiting for a full Retransmission Time Out (RTO) period. 
+The thinking behind TRIGTRAN was that if a path completely stopped working because a link along the path was "down",  somehow TCP could be signaled when that link returned to service, and the sending TCP could retry immediately, without waiting for a full retransmission timeout (RTO) period. 
 
 ### Reasons for Non-deployment
+
+The early dreams for TRIGTRAN were dashed because of an assumption that TRIGTRAN triggers would be unauthenticated. This meant that any "safe" TRIGTRAN mechanism would have relied on a mechanism such as setting the IPv4 TTL or IPv6 Hop Count to 255 at a sender and testing that it was 254 upon receipt, so that a receiver could verify that a signal was generated by an adjacent sender known to be on the path being used, and not some unknown sender which might not even be on the path (e.g., "The Generalized TTL Security Mechanism (GTSM)" {{RFC5082}}). This situation is very similar to the case for ICMP Source Quench messages as described in {{Source-Quench}}, which were also unauthenticated, and could be sent by an off-path attacker, resulting in deprecation of ICMP Source Quench message processing {{RFC6633}}. 
+
+TRIGTRAN's scope shrunk from "the path is down" to "the first-hop link is down". 
+
+But things got worse.
+
+Because TRIGTRAN triggers would only be provided when the first-hop link was "down", TRIGTRAN triggers couldn't replace normal TCP retransmission behavior if the path failed because some link further along the network path was "down". So TRIGTRAN triggers added complexity to an already complex TCP state machine, and did not allow any existing complexity to be removed.
+
+There was also an issue that the TRIGTRAN signal was not sent in response to a specific host that had been sending packets, and was instead a signal that stimulated a response by any sender on the link. This needs to scale when there are multiple flows trying to use the same resource, yet the sender of a trigger has no understanding how many of the potential traffic sources will respond by sending packets - if recipients of the signal back-off their responses to a trigger to improve scaling, then that immediately mitigates the benefit of the signal.
+
+Finally, intermediate forwarding devices required modification to provide TRIGTRAN triggers, but operators couldn't charge for TRIGTRAN triggers, so there was no way to recover the cost of modifying, testing, and deploying updated intermediate devices.
 
 Two TRIGTRAN BOFs were held, at IETF 55 {{TRIGTRAN-55}} and IETF 56 {{TRIGTRAN-56}}, but this work was not chartered, and there was no interest in deploying TRIGTRAN unless it was chartered and standardized in the IETF. 
 
 ### Lessons Learned. 
 
-The reasons why this work was not chartered provide several useful lessons for researchers.
+The reasons why this work was not chartered, much less deployed, provide several useful lessons for researchers.
 
-- TRIGTRAN triggers are only provided when the first-hop link is "down", so TRIGTRAN triggers couldn't replace normal TCP retransmission behavior if the path failed because some link further along the network path was "down". So TRIGTRAN triggers added complexity to an already complex TCP state machine, and didn't allow any existing complexity to be removed.
-- The state of the art in the early 2000s was that TRIGTRAN triggers were assumed to be unauthenticated, so they couldn't be trusted to tell a sender to "speed up", only to "slow down". This reduced the potential benefit to implementers.
-- intermediate forwarding devices required modification to provide TRIGTRAN triggers, but operators couldn't charge for TRIGTRAN triggers, so there was no way to recover the cost of modifying, testing, and deploying updated intermediate devices.
+- TRIGTRAN started with a plausible value proposition, but networking realities in the early 2000s forced reductions in scope that led directly to reductions in potential benefits, but no corresponding reductions in costs and complexity. 
+- These reductions in scope were the direct result of an inability for hosts to trust or authenticate TRIGTRAN signals they received from the network. 
+- Operators did not believe they could charge for TRIGTRAN signaling, because first-hop links didn't fail frequently, and TRIGTRAN provided no reduction in operating expenses, so there was little incentive to purchase and deploy TRIGTRAN-capable network equipment. 
+
+It is also worth noting that the targeted environment for TRIGTRAN in the late 1990s contained links with a relatively small number of directly-connected hosts - for instance, cellular or satellite links. The transport community was well aware of the dangers of sender synchronization based on multiple senders receiving the same stimulus at the same time, but the working assumption for TRIGTRAN was that there wouldn't be enough senders for this to be a meaningful problem. In the 2010s, it is common for a single "link" to support many senders and receivers on a single link, likely requiring TRIGTRAN senders to wait some random amount of time before sending after receiving a TRIGTRAN signal, which would have reduced the benefits of TRIGTRAN even more.
 
 ## Shim6 {#Shim6}
 
@@ -395,7 +562,7 @@ Note that the problem being addressed was "site multihoming", but Shim6 was prov
 
 Although more work could have been done to provide a better technical solution, the biggest impediments to Shim6 deployment were operational and business considerations. These impediments were discussed at multiple network operator group meetings, including {{Shim6-35}} at {{NANOG-35}}.
 
-The technology issues centered around scaling concerns that Shim6 relied on the host to track all the TCP connections and the file descriptions with associated HTTP state, while also tracking Identity/Locator mappings in the kernel, and tracking failures to recognize that a backup path has failed.
+The technology issues centered around concerns that Shim6 relied on the host to track all the connections, while also tracking Identity/Locator mappings in the kernel, and tracking failures to recognize that a backup path has failed.
 
 The operator issues centered around concerns that operators were performing traffic engineering, but would have no visibility or control over hosts when they chose to begin using another path, and relying on hosts to engineer traffic exposed their networks to oscillation based on feedback loops, as hosts move from path to path. At a minimum, traffic engineering policies must be pushed down to individual hosts. In addition, the usual concerns about firewalls that expected to find a transport-level protocol header in the IP payload, and won't be able to perform firewalling functions because its processing logic would have to look past the Identity header. 
 
@@ -405,7 +572,11 @@ The business issues centered removing or reducing the ability to sell BGP multih
 
 It is extremely important to take operational concerns into account when a path-aware protocol is making decisions about path selection that may conflict with existing operational practices and business considerations. 
 
-We also note that some path-aware networking ideas recycle. Stream Control Transmission Protocol (SCTP) has provided support for multihoming since 2000 {{RFC2960}}, but was designed to transport PSTN signaling messages over IP networks. SCTP was capable of broader applications, but because multi-homed hosts in the 1990s were uncommon, and deployment of new transport protocols such as SCTP required either operating system kernel support or access to raw IP packets until a UDP encapsulation for SCTP {{RFC6951}} was produced in 2013, SCTP multihoming did not stir up the same operator concerns that Shim6 encountered. Although Shim6 did not achieve significant deployment, the IETF chartered a working group to specify "Multipath TCP" {{MP-TCP}} in 2009, and Multipath TCP allows general-purpose TCP applications to control path selection, with many of the same advantages and disadvantages of Shim6. 
+### Addendum on MultiPath TCP {#Addendum-MP-TCP}
+
+During discussions in the PANRG session at IETF 103 {{PANRG-103-Min}}, Lars Eggert, past Transport Area Director, pointed out that during charter discussions for the Multipath TCP working group {{MP-TCP}}, operators expressed concerns that customers could use Multipath TCP to loadshare TCP connections across operators simultaneously and compare passive performance measurements across network paths in real time, changing the balance of power in those business relationships. Although the Multipath TCP working group was chartered, this concern could have acted as an obstacle to deployment. 
+
+Operator objections to Shim6 were focused on technical concerns, but this concern could have also been an obstacle to Shim6 deployment if the technical concerns had been overcome. 
 
 ## Next Steps in Signaling (NSIS) {#NSIS}
 
@@ -474,8 +645,8 @@ End-to-end signaling technologies not only
     require some kind of dynamic service level agreement support that
     would imply (potentially quite complex) bilateral negotiations
     between different Internet service providers. This complexity was 
-    currently not considered to be justified and increasing the
-    bandwidth capacity (and thus avoiding bottlenecks) was 
+    not considered to be justified and increasing the
+    bandwidth (and thus avoiding bottlenecks) was 
     cheaper than actively managing network resource bottlenecks by
     using path-coupled QoS signaling technologies. Furthermore, an
     end-to-end path typically involves several provider domains and
@@ -486,23 +657,65 @@ End-to-end signaling technologies not only
 One goal of NSIS was to decrease the complexity of the signaling
 protocol, but a path-coupled signaling protocol comes with the 
 intrinsic complexity of IP-based networks, beyond the complexity of the 
-signaling protocol itself. Sources of intrinsic complexity include
+signaling protocol itself. Sources of intrinsic complexity include:
 
 * the presence of asymmetric routes between endpoints and routers
 * the lack of security and trust at large in the Internet infrastructure
-* the presence of different trust boundaries,
-* the effects of best-effort networks (e.g., packet loss)
+* the presence of different trust boundaries
+* the effects of best-effort networks (e.g., robustness to packet loss)
 * divergence from the fate sharing principle (e.g., state within the network).
 
 Any path-coupled signaling protocol has to deal with these realities.
 
 Operators view the use of IPv4 and IPv6 Router Alert Option (RAO) to signal routers along the path from end systems with suspicion, because these end systems are usually not authenticated and heavy use of RAOs can easily increase the CPU load on routers that are designed to process most packets using a hardware "fast path". 
 
+## IPv6 Flow Label {#FL}
+
+The suggested references for IPv6 Flow Label are:
+
+- IPv6 Flow Label Specification {{RFC6437}}
+
+IPv6 specifies a 20-bit field Flow Label field {{RFC6437}}, included in the fixed part of the IPv6 header and hence present in every IPv6 packet. An endpoint sets the value  in this field to one of a set of pseudo-randomly assigned values. If a packet is not part of any flow, the flow label value is set to zero {{RFC3697}}. A number of Standards Track and Best Current Practice RFCs (e.g., {{RFC8085}}, {{RFC6437}}, {{RFC6438}}) encourage IPv6 endpoints to set a non-zero value in this field.  A multiplexing transport could choose to use multiple flow labels to allow the network to independently forward its subflows, or to use one common value for the traffic aggregate.  The flow label is present in all fragments. IPsec was originally put forward as one important use-case for this mechanism and does encrypt the field {{RFC6438}}. 
+
+Once set, the flow label can provide information that can help inform network devices about subflows present at the transport layer, without needing to interpret the setting of upper layer protocol fields {{RFC6294}}.  This information can also be used to coordinate how aggregates of transport subflows are grouped when queued in the network and to select appropriate per-flow forwarding when choosing between alternate paths {{RFC6438}} (e.g. for Equal Cost Multipath Routing (ECMP) and Link Aggregation (LAG)).  
+
+### Reasons for Non-deployment
+
+Despite the field being present in every IPv6 packet, the mechanism did not receive as much use as originally envisioned.  One reason is that to be useful it requires engagement by two different  stakeholders:
+
+* Endpoint Implementation: 
+
+For network devices along a path to utilize the flow label there needs to be a non-zero value value inserted in the field {{RFC6437}} at the sending endpoint. 
+This needs to be an incentive an endpoint to set an appropriate non-zero value. 
+The value should appropriately reflect the level of aggregation the traffic expects to be provided by the network. However, this requires the stack  to know granularity at which flows should be identified (or conversely which flows should receive aggregated treatment), i.e., which packets carry the same flow label. Therefore, setting a non-zero value may result in additional choices that need to be made by an application developer.
+
+Although the standard {{RFC3697}} forbids any encoding of meaning into the flow label value, the opportunity to use the flow label as a covert channel or to signal other meta-information may have raised concerns about setting a non-zero value {{RFC6437}}. 
+
+Before methods are widely deployed to use this method, there could be no incentive for an endpoint to set the field.
+
+* Operational support in network devices: 
+
+A benefit can only be realized when a network device along the path also uses this information to inform its decisions.  Network equipment (routers and/or middleboxes) need to include appropriate support so they can utilize the field when making decisions about how to classify flows, or to inform forwarding choices. Use of any optional feature in a network device also requires corresponding updates to operational procedures, and therefore is normally only introduced when the cost can be justified.
+
+A benefit from utilizing the flow label is expected to be increased quality of experience for applications - but this comes at some operational cost to an operator, and requires endpoints to set the field. 
+
+### Lessons Learned
+
+The flow label is a general purpose header field for use by the path. Multiple uses have been proposed. One candidate use was to reduce the  complexity of forwarding decisions. However,  modern routers can use a "fast path", often taking advantage of hardware to accelerate processing. The method can assist in more complex forwarding, such as ECMP and load balancing.
+
+Although {{RFC6437}} recommended that endpoints should by default choose uniformly-distributed labels for their traffic, the specification permitted an endpoint to choose to set a zero value. This ability of endpoints to choose to set a flow label of zero has had consequences on deployability:
+
+* Before wide-scale support by endpoints, it would be impossible to rely on a non-zero flow label being set. Network devices therefore would need to also employ other techniques to realize equivalent functions. An example of a method is one assuming semantics of the source port field to provide entropy input to a network-layer hash. This use of a 5-tuple to classify a packet represents a layering violation {{RFC6294}}. When other methods have been deployed, they increase the cost of deploying standards-based methods, even though they may offer less control to  endpoints and result in potential interaction with other uses/interpretation of the field. 
+* Even though the flow label is specified as a end-to-end field, some network paths have been observed to not transparently forward the flow label. This could result from non-conformant equipment, or could indicate that some operational networks have chosen to re-use the protocol field for other (e.g. internal purposes). This results in lack of transparency, and a deployment hurdle to endpoints expecting that they can set a flow label that is utilized by the network.  The more recent practice of "greasing" {{GREASE}} would suggest that a different outcome could have been achieved if endpoints were always required to set a non-zero value.
+* {{RFC1809}} noted that setting the choice of the flow label value can depend on the expectations of the traffic generated by an application, which suggests an API should be presented to control the setting or policy that is used. However, many currently available APIs do not have this support.
+
+A growth in the use of encrypted transports, (e.g. QUIC {{QUIC-WG}}) seems likely to raise similar issues to those discussed above and could motivate renewed interest in utilizing the flow label.
+
 # Security Considerations
 
-This document describes ideas that were not adopted and widely deployed on the Internet, so it doesn't affect the security of the Internet. 
+This document describes Path Aware technologies that were not adopted and widely deployed on the Internet, so it doesn't affect the security of the Internet. 
 
-If this document meets its goals, we may develop new ideas for Path Aware Networking that would affect the security of the Internet, but security considerations for those ideas will be described in the corresponding RFCs that propose them.
+If this document meets its goals, we may develop new technologies for Path Aware Networking that would affect the security of the Internet, but security considerations for those technologies will be described in the corresponding RFCs that specify them.
 
 # IANA Considerations
 
@@ -510,9 +723,13 @@ This document makes no requests of IANA.
 
 # Acknowledgments
 
+Initial material for {{ST2}} on ST2 was provided by Gorry Fairhurst. 
+
 Initial material for {{IntServ}} on IntServ was provided by Ron Bonica.
 
 Initial material for {{Quick-Start}} on Quick-Start TCP was provided by Michael Scharf.
+
+Initial material for {{Source-Quench}} on ICMP Source Quench was provided by Gorry Fairhurst. 
 
 Initial material for {{TRIGTRAN}} on Triggers for Transport (TRIGTRAN) was provided by Spencer Dawkins.
 
@@ -520,7 +737,11 @@ Initial material for {{TRIGTRAN}} on Triggers for Transport (TRIGTRAN) was provi
 
 Initial material for {{NSIS}} on Next Steps In Signaling (NSIS) was provided by Roland Bless and Martin Stiemerling.
 
-Our thanks to Roland Bless, Ruediger Geib, and Joe Touch, who provided review comments on previous versions.
+Initial material for {{FL}} on IPv6 Flow Labels was provided by Gorry Fairhurst. 
+
+Our thanks to Roland Bless, Wes Eddy, Ruediger Geib, Gorry Fairhurst, and Joe Touch, who provided review comments on previous versions.
+
+Special thanks to Adrian Farrel for helping Spencer navigate the twisty little passages of Flow Specs and Filter Specs in IntServ, RSVP, MPLS, and BGP. They are all alike, except for the differences {{Colossal-Cave}}.
 
 --- back
 
