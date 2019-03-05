@@ -354,7 +354,7 @@ Each Lesson Learned is tagged with one or more contributions that encountered th
 
 - If the endpoints do not have any trust relationship with the intermediate devices along a path, operators can be reluctant to deploy technologies that rely on endpoints sending unauthenticated control signals to routers. (See {{IntServ}} and {{NSIS}}. We also note this still remains a factor hindering deployment of DiffServ).
 
--  If intermediate devices along the path can't be trusted, it's unlikely that endpoints will rely on signals from intermediate devices to drive changes to endpoint behaviors. (See {{TRIGTRAN}}, {{Source-Quench}}). The lowest level of trust is sufficient for a device issuing a message to confirm that it has visibility of the packets the path it is seeking to control {{RFC8085}} (e.g., an ICMP message included a quoted packet from the source). A higher level of trust can arise when a network device could have a long or short term trust relationship with the sender it controls.
+-  If intermediate devices along the path can't be trusted, it's unlikely that endpoints will rely on signals from intermediate devices to drive changes to endpoint behaviors. (See {{TRIGTRAN}}, {{Source-Quench}}). The lowest level of trust is sufficient for a device issuing a message to confirm that it has visibility of the packets on the path it is seeking to control {{RFC8085}} (e.g., an ICMP message included a quoted packet from the source). A higher level of trust can arise when a network device could have a long or short term trust relationship with the sender it controls.
 
 - Because the Internet is a distributed system, if the distance that information from distant hosts and routers travels to a Path Aware host or router is sufficiently large, the information may no longer represent the state and situation at the distant host or router when it is received. In this case, the benefit that a Path Aware technology provides likely decreases. (See {{Quick-Start}}).
 
@@ -422,7 +422,7 @@ Applications use Flow Specification (Flow Specs) {{RFC2210}} to describe the tra
 
 Although IntServ has been used in enterprise and government networks, IntServ was never widely deployed on the Internet because of its cost. The following factors contributed to operational cost:
 
-- IntServ must be deployed on every router on every router that is on a path where IntServ is to be used
+- IntServ must be deployed on every router that is on a path where IntServ is to be used
 - IntServ maintained per flow state
 
 As IntServ was being discussed, the following occurred:
@@ -434,8 +434,8 @@ As IntServ was being discussed, the following occurred:
 
 The following lessons were learned:
 
-- Any mechanism that requires a router to maintain per-flow state is not likely to succeed, unless the additional cost for offering the feature can be  recovered from the user.
-- Any mechanism that requires an operator to upgrade all of its routers is not likely to succeed, unless the additional cost for offering the feature be  recovered from the user
+- Any mechanism that requires a router to maintain per-flow state is not likely to succeed, unless the additional cost for offering the feature can be recovered from the user.
+- Any mechanism that requires an operator to upgrade all of its routers is not likely to succeed, unless the additional cost for offering the feature can be recovered from the user.
 
 In environments where IntServ has been deployed, trust relationships with endpoints are very different from trust relationships on the Internet itself, and there are often clearly-defined hierarchies in Service Level Agreements (SLAs), and well-defined transport flows operating with pre-determined capacity and latency requirements over paths where capacity or other attributes are constrained. 
 
@@ -487,7 +487,7 @@ The ICMP Source Quench message {{RFC0792}} allowed an on-path router to request 
 
 ### Reasons for Non-deployment 
 
-This method was deployed in Internet routers over a period of time, the reaction of endpoints to receiving this signal has varied. For low speed links, with low multiplexing of flows the methods could be used to regulate (momentarily reduce) the transmission rate. However, the simple signal does not scale with link speed, or the number of flows sharing a link.
+This method was deployed in Internet routers over a period of time, the reaction of endpoints to receiving this signal has varied. For low speed links, with low multiplexing of flows the method could be used to regulate (momentarily reduce) the transmission rate. However, the simple signal does not scale with link speed, or the number of flows sharing a link.
 
 The approach was overtaken by the evolution of congestion control methods in TCP {{RFC2001}}, and later also by other IETF transports. Because these methods were based upon measurement of the end-to-end path and an algorithm in the endpoint, they were able to evolve and mature more rapidly than methods relying on interactions between operational routers and endpoint stacks.
 
@@ -499,9 +499,9 @@ This method had several problems:
 
 First, {{RFC0792}} did not sufficiently specify how the sender would react to the ICMP Source Quench signal from the path (e.g., {{RFC1016}}). There was ambiguity in how the sender should utilize this additional information. This could lead to unfairness in the way that receivers (or routers) responded to this message. 
 
-Second, while message did provide additional information, the Explicit Congestion Notification (ECN) mechanism {{RFC3168}} provided a more robust and informative signal for network devices to provide early indication that a path has become congested.
+Second, while the message did provide additional information, the Explicit Congestion Notification (ECN) mechanism {{RFC3168}} provided a more robust and informative signal for network devices to provide early indication that a path has become congested.
 
-The mechanism originated at a time when the Internet trust model was very different. Most endpoint implementations did not attempt to verify that the message originated from an on-path device before they utilized the message. This made it vulnerable to denial of service attack.  In theory, routers might have chosen to use the quoted packet contained in the ICMP payload to validate that the message originated from an on-path device, but this would have increased per-packet processing overhead for each router along the path, would have required transport functionality in the router to verify whether the qu0ted packet headed corresponded to a packet the router had sent. In addition, section 5.2 of {{RFC4443}} noted ICMPv6-based attacks on hosts that would also have threatened routers processing ICMPv6 Source Quench payloads. As time passed, it became increasingly obvious that the lack of validation of the messages exposed receivers to a security vulnerability where the messages could be forged to create a tangible denial of service opportunity.
+The mechanism originated at a time when the Internet trust model was very different. Most endpoint implementations did not attempt to verify that the message originated from an on-path device before they utilized the message. This made it vulnerable to denial of service attacks.  In theory, routers might have chosen to use the quoted packet contained in the ICMP payload to validate that the message originated from an on-path device, but this would have increased per-packet processing overhead for each router along the path, would have required transport functionality in the router to verify whether the quoted packet header corresponded to a packet the router had sent. In addition, section 5.2 of {{RFC4443}} noted ICMPv6-based attacks on hosts that would also have threatened routers processing ICMPv6 Source Quench payloads. As time passed, it became increasingly obvious that the lack of validation of the messages exposed receivers to a security vulnerability where the messages could be forged to create a tangible denial of service opportunity.
 
 ## Triggers for Transport (TRIGTRAN) {#TRIGTRAN}
 
@@ -548,7 +548,7 @@ The suggested references for Shim6 are:
 
 The IPv6 routing architecture {{RFC1887}} assumed that most sites on the Internet would be identified by Provider Assigned IPv6 prefixes, so that Default-Free Zone routers only contained routes to other providers, resulting in a very small routing table. 
 
-For a single-homed site, this could work well. A multi-homed site with only one upstream provider could also work well, although BGP multihoming from a single upstream provider was often a premium service (costing more than twice as much as two single-homed sites), and if the single upstream provider went out of service, all of the multi-homed paths could fail simultaneously. 
+For a single-homed site, this could work well. A multihomed site with only one upstream provider could also work well, although BGP multihoming from a single upstream provider was often a premium service (costing more than twice as much as two single-homed sites), and if the single upstream provider went out of service, all of the multihomed paths could fail simultaneously. 
 
 IPv4 sites often multihomed by obtaining Provider Independent prefixes, and advertising these prefixes through multiple upstream providers. With the assumption that any multihomed IPv4 site would also multihome in IPv6, it seemed likely that IPv6 routing would be subject to the same pressures to announce Provider Independent prefixes, resulting in a global IPv6 routing table that exhibited the same problems as the global IPv4 routing table. During the early 2000s, work began on a protocol that would provide the same benefits for multihomed IPv6 sites without requiring sites to advertise Provider Independent prefixes into the global routing table. 
 
@@ -686,7 +686,7 @@ Despite the field being present in every IPv6 packet, the mechanism did not rece
 * Endpoint Implementation: 
 
 For network devices along a path to utilize the flow label there needs to be a non-zero value value inserted in the field {{RFC6437}} at the sending endpoint. 
-This needs to be an incentive an endpoint to set an appropriate non-zero value. 
+There needs to be an incentive for an endpoint to set an appropriate non-zero value. 
 The value should appropriately reflect the level of aggregation the traffic expects to be provided by the network. However, this requires the stack  to know granularity at which flows should be identified (or conversely which flows should receive aggregated treatment), i.e., which packets carry the same flow label. Therefore, setting a non-zero value may result in additional choices that need to be made by an application developer.
 
 Although the standard {{RFC3697}} forbids any encoding of meaning into the flow label value, the opportunity to use the flow label as a covert channel or to signal other meta-information may have raised concerns about setting a non-zero value {{RFC6437}}. 
@@ -706,7 +706,7 @@ The flow label is a general purpose header field for use by the path. Multiple u
 Although {{RFC6437}} recommended that endpoints should by default choose uniformly-distributed labels for their traffic, the specification permitted an endpoint to choose to set a zero value. This ability of endpoints to choose to set a flow label of zero has had consequences on deployability:
 
 * Before wide-scale support by endpoints, it would be impossible to rely on a non-zero flow label being set. Network devices therefore would need to also employ other techniques to realize equivalent functions. An example of a method is one assuming semantics of the source port field to provide entropy input to a network-layer hash. This use of a 5-tuple to classify a packet represents a layering violation {{RFC6294}}. When other methods have been deployed, they increase the cost of deploying standards-based methods, even though they may offer less control to  endpoints and result in potential interaction with other uses/interpretation of the field. 
-* Even though the flow label is specified as a end-to-end field, some network paths have been observed to not transparently forward the flow label. This could result from non-conformant equipment, or could indicate that some operational networks have chosen to re-use the protocol field for other (e.g. internal purposes). This results in lack of transparency, and a deployment hurdle to endpoints expecting that they can set a flow label that is utilized by the network.  The more recent practice of "greasing" {{GREASE}} would suggest that a different outcome could have been achieved if endpoints were always required to set a non-zero value.
+* Even though the flow label is specified as an end-to-end field, some network paths have been observed to not transparently forward the flow label. This could result from non-conformant equipment, or could indicate that some operational networks have chosen to re-use the protocol field for other (e.g. internal purposes). This results in lack of transparency, and a deployment hurdle to endpoints expecting that they can set a flow label that is utilized by the network.  The more recent practice of "greasing" {{GREASE}} would suggest that a different outcome could have been achieved if endpoints were always required to set a non-zero value.
 * {{RFC1809}} noted that setting the choice of the flow label value can depend on the expectations of the traffic generated by an application, which suggests an API should be presented to control the setting or policy that is used. However, many currently available APIs do not have this support.
 
 A growth in the use of encrypted transports, (e.g. QUIC {{QUIC-WG}}) seems likely to raise similar issues to those discussed above and could motivate renewed interest in utilizing the flow label.
