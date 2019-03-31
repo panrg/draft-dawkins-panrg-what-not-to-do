@@ -1,7 +1,7 @@
 ---
 title: "Path Aware Networking: Obstacles to Deployment (A Bestiary of Roads Not Taken)"
 abbrev: What Not To Do
-docname: draft-irtf-panrg-what-not-to-do-01
+docname: draft-irtf-panrg-what-not-to-do-02
 date: 
 category: info
 submissiontype: IRTF
@@ -322,13 +322,13 @@ The to-do list for upcoming revisions includes
 
 - If the Research Group identifies technologies that provided lessons that aren't included in {{LessonsLearned}}, solicit contributions for those technologies.
 
-- Edit the contributed subsections for basic consistency (since they have different contributors providing initial material). 
+- Provide better context for {{LessonsLearned}}, to make sure that individual lessons aren't considered in isolation, and to distinguish between impediments to deployment.
 
 ## Architectural Guidance
 
 As background for understanding the Lessons Learned contained in this document, the reader is encouraged to become familiar with the Internet Architecture Board's documents on "What Makes for a Successful Protocol?" {{RFC5218}} and "Planning for Protocol Adoption and Subsequent Transitions" {{RFC8170}}.
 
-Although these two documents do not specifically target path-aware networking protocols, they are helpful resources for readers seeing to improve their understanding of successful protocol adoption and deployment.
+Although these two documents do not specifically target path-aware networking protocols, they are helpful resources for readers seeing to improve their understanding of considerations for successful and deployment of any protocol.
 
 Because there is an economic aspect to decisions about deployment, the IAB Workshop on Internet Technology Adoption and Transition {{ITAT}} report {{RFC7305}} also provides food for thought.
 
@@ -739,7 +739,7 @@ Initial material for {{NSIS}} on Next Steps In Signaling (NSIS) was provided by 
 
 Initial material for {{FL}} on IPv6 Flow Labels was provided by Gorry Fairhurst. 
 
-Our thanks to Roland Bless, Wes Eddy, Ruediger Geib, Gorry Fairhurst, and Joe Touch, who provided review comments on previous versions.
+Our thanks to Gorry Fairhurst, Joe Touch, Joeri de Ruiter, Roland Bless, Ruediger Geib, and Wes Eddy, who provided review comments on previous versions.
 
 Special thanks to Adrian Farrel for helping Spencer navigate the twisty little passages of Flow Specs and Filter Specs in IntServ, RSVP, MPLS, and BGP. They are all alike, except for the differences {{Colossal-Cave}}.
 
