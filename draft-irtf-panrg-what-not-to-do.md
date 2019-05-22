@@ -1,7 +1,7 @@
 ---
 title: "Path Aware Networking: Obstacles to Deployment (A Bestiary of Roads Not Taken)"
 abbrev: What Not To Do
-docname: draft-irtf-panrg-what-not-to-do-02
+docname: draft-irtf-panrg-what-not-to-do-03
 date: 
 category: info
 submissiontype: IRTF
@@ -308,7 +308,7 @@ Discussion of specific contributed experiences and this document in general shou
 
 (RFC Editor: please remove this section before publication)
 
-The editor and research group chairs are aware that the current version of this document is tilted toward transport-level Path Aware technologies, and would like to interact with other IETF  protocol communities who have experience with Path Aware technologies. 
+The editor and research group chairs are aware that the current version of this document is tilted toward transport-level Path Aware technologies, and would like to interact with other IETF  protocol communities who have experience with Path Aware technologies.
 
 It is worth looking at the Lessons Learned in {{LessonsLearned}} to see whether the Internet has changed in ways that would make some lessons less applicable for future protocol design. 
 
@@ -322,15 +322,17 @@ The to-do list for upcoming revisions includes
 
 - If the Research Group identifies technologies that provided lessons that aren't included in {{LessonsLearned}}, solicit contributions for those technologies.
 
-- Provide better context for {{LessonsLearned}}, to make sure that individual lessons aren't considered in isolation, and to distinguish between impediments to deployment.
+- Provide better context for {{LessonsLearned}}, to make sure that individual lessons aren't considered in isolation, and to distinguish between impediments to deployment and blockers for deployment.
 
 ## Architectural Guidance
 
 As background for understanding the Lessons Learned contained in this document, the reader is encouraged to become familiar with the Internet Architecture Board's documents on "What Makes for a Successful Protocol?" {{RFC5218}} and "Planning for Protocol Adoption and Subsequent Transitions" {{RFC8170}}.
 
-Although these two documents do not specifically target path-aware networking protocols, they are helpful resources for readers seeing to improve their understanding of considerations for successful and deployment of any protocol.
+Although these two documents do not specifically target path-aware networking protocols, they are helpful resources for readers seeking to improve their understanding of considerations for successful adoption and deployment of any protocol. For example, the Basic Success Factors described in Setion 2.1 of {{RFC5218}} are helpful for readers of this document. 
 
 Because there is an economic aspect to decisions about deployment, the IAB Workshop on Internet Technology Adoption and Transition {{ITAT}} report {{RFC7305}} also provides food for thought.
+
+Most of the Lessons Learned in {{LessonsLearned}} reflect considerations described in {{RFC5218}}, {{RFC7305}}, and {{RFC8170}}.
 
 # Summary of Lessons Learned {#LessonsLearned}
 
@@ -338,17 +340,19 @@ This section summarizes the Lessons Learned from the contributed sections in {{C
 
 Each Lesson Learned is tagged with one or more contributions that encountered this obstacle as a significant impediment to deployment. Other contributed technologies may have also encountered this obstacle, but this obstacle may not have been the biggest impediment to deployment. 
 
+It is useful to notice that sometimes an obstacle might impede deployment, while at other times, the same obstacle might prevent deployment entirely. The research group discussed distinguishing between obstacles that impede and obstacles that prevent, but it appears that the boundary between "impede" and "prevent" can shift over time - some of the Lessons Learned are based on both Path Aware technologies that were not deployed, and Path Aware technologies that were deployed, but were not deployed widely or quickly. See {{Shim6}} and {{Addendum-MP-TCP}} as one example of this shifting boundary. 
+
 - The benefit of Path Awareness must be great enough to overcome entropy for already-deployed devices. The colloquial American English expression, "If it ain't broke, don't fix it" is a "best current practice" on today's Internet. (See {{Quick-Start}}, {{TRIGTRAN}}, and {{Source-Quench}}).
 
 - Providing benefits for early adopters can be key - if everyone must deploy a technology in order for the technology to provide benefits, or even to work at all, the technology is unlikely to be adopted. (See {{IntServ}} and {{Quick-Start}}).
 
 - Adaptive end-to-end protocol mechanisms may respond to feedback quickly enough that the additional realizable benefit from a new Path Aware mechanism may be much smaller than anticipated (see {{Quick-Start}} and {{TRIGTRAN}}). 
 
-- "Follow the money." If operators can't charge for a Path Aware technology to recover the costs of deploying it, the benefits to the operator must be really significant. (See {{TRIGTRAN}}, {{ST2}}, and {{IntServ}}).
+- "Follow the money." If operators can't charge for a Path Aware technology to recover the costs of deploying it, the benefits to the operator must be really significant. Corollary: If operators charge for a Path Aware technology, the benefits to the user must be significant enough to justify the cost. (See {{TRIGTRAN}}, {{ST2}}, and {{IntServ}}).
 
 - Impact of a Path Aware technology requiring changes to operational practices can prevent deployment of promising technology. (See {{Shim6}}, including {{Addendum-MP-TCP}}).
 
-- Per-connection state in intermediate devices can be an impediment to adoption and deployment. (See {{ST2}} and {{IntServ}}).
+- Per-connection state in intermediate devices can be an impediment to adoption and deployment. This is especially true as we move from the edge of the network into the routing core (See {{ST2}} and {{IntServ}}).
 
 - Many modern routers, especially high-end routers, have not been designed to make heavy use of in-band mechanisms such as IPv4 and IPv6 Router Alert Options (RAO), so operators can be reluctant to deploy technologies that rely on these mechanisms. (See {{NSIS}}).
 
@@ -739,7 +743,7 @@ Initial material for {{NSIS}} on Next Steps In Signaling (NSIS) was provided by 
 
 Initial material for {{FL}} on IPv6 Flow Labels was provided by Gorry Fairhurst. 
 
-Our thanks to Gorry Fairhurst, Joe Touch, Joeri de Ruiter, Roland Bless, Ruediger Geib, and Wes Eddy, who provided review comments on previous versions.
+Our thanks to C.M. Heard, Gorry Fairhurst, Joe Touch, Joeri de Ruiter, Roland Bless, Ruediger Geib, and Wes Eddy, who provided review comments on previous versions.
 
 Special thanks to Adrian Farrel for helping Spencer navigate the twisty little passages of Flow Specs and Filter Specs in IntServ, RSVP, MPLS, and BGP. They are all alike, except for the differences {{Colossal-Cave}}.
 
