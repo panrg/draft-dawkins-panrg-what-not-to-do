@@ -1,7 +1,7 @@
 ---
 title: "Path Aware Networking: Obstacles to Deployment (A Bestiary of Roads Not Taken)"
 abbrev: What Not To Do
-docname: draft-irtf-panrg-what-not-to-do-03
+docname: draft-irtf-panrg-what-not-to-do-04
 date: 
 category: info
 submissiontype: IRTF
@@ -27,7 +27,7 @@ author:
   -
     ins: S. Dawkins
     name: Spencer Dawkins
-    organization: Wonder Hamster Internetworking
+    organization: Tencent America 
     email: spencerdawkins.ietf@gmail.com
     role: editor
 
@@ -122,6 +122,20 @@ informative:
     title: "Wikipedia Page for Colossal Cave Adventure"
     date: Retrieved January 2019
 
+  draft-arkko-arch-internet-threat-model:
+    title: "Changes in the Internet Threat Model" 
+    target: https://datatracker.ietf.org/doc/draft-arkko-arch-internet-threat-model/
+    author: 
+      ins: J. Arkko 
+      name: Jari Arkko
+
+  draft-farrell-etm:
+    title: "We're gonna need a bigger threat model" 
+    target: https://datatracker.ietf.org/doc/draft-farrell-etm/
+    author: 
+      ins: S. Farrell 
+      name: Stephen Farrell 
+
   IEN-119: 
     title: "ST - A Proposed Internet Stream Protocol" 
     target: https://www.rfc-editor.org/ien/ien119.txt
@@ -167,6 +181,11 @@ informative:
     title: "Path Aware Networking Research Group - IETF-103 Minutes"
     date: November 2018 
 
+  PANRG-105-Min:
+    target: https://datatracker.ietf.org/doc/minutes-105-panrg/
+    title: "Path Aware Networking Research Group - IETF-105 Minutes"
+    date: July 2019
+
   PATH-Decade:
     target: https://datatracker.ietf.org/doc/slides-99-panrg-a-decade-of-path-awareness/
     title: "A Decade of Path Awareness"
@@ -203,6 +222,11 @@ informative:
   QUIC-WG:
     target: https://datatracker.ietf.org/wg/quic/about/
     title: "QUIC Working Group Home Page"
+  
+  SAAG-105-Min:
+    target: https://datatracker.ietf.org/meeting/105/materials/minutes-105-saag-00
+    title: "Security Area Open Meeting - IETF-105 Minutes"
+    date: July 2019
 
   SAF07: 
     author: 
@@ -342,27 +366,97 @@ Each Lesson Learned is tagged with one or more contributions that encountered th
 
 It is useful to notice that sometimes an obstacle might impede deployment, while at other times, the same obstacle might prevent deployment entirely. The research group discussed distinguishing between obstacles that impede and obstacles that prevent, but it appears that the boundary between "impede" and "prevent" can shift over time - some of the Lessons Learned are based on both Path Aware technologies that were not deployed, and Path Aware technologies that were deployed, but were not deployed widely or quickly. See {{Shim6}} and {{Addendum-MP-TCP}} as one example of this shifting boundary. 
 
-- The benefit of Path Awareness must be great enough to overcome entropy for already-deployed devices. The colloquial American English expression, "If it ain't broke, don't fix it" is a "best current practice" on today's Internet. (See {{Quick-Start}}, {{TRIGTRAN}}, and {{Source-Quench}}).
+## Overcoming Entropy {#OvercomingEntropy}
 
-- Providing benefits for early adopters can be key - if everyone must deploy a technology in order for the technology to provide benefits, or even to work at all, the technology is unlikely to be adopted. (See {{IntServ}} and {{Quick-Start}}).
+The benefit of Path Awareness must be great enough to overcome entropy for already-deployed devices. The colloquial American English expression, "If it ain't broke, don't fix it" is a "best current practice" on today's Internet. (See {{Quick-Start}}, {{TRIGTRAN}}, and {{Source-Quench}}).
 
-- Adaptive end-to-end protocol mechanisms may respond to feedback quickly enough that the additional realizable benefit from a new Path Aware mechanism may be much smaller than anticipated (see {{Quick-Start}} and {{TRIGTRAN}}). 
+## Providing Benefits for Early Adopters {#EarlyAdopters}
 
-- "Follow the money." If operators can't charge for a Path Aware technology to recover the costs of deploying it, the benefits to the operator must be really significant. Corollary: If operators charge for a Path Aware technology, the benefits to the user must be significant enough to justify the cost. (See {{TRIGTRAN}}, {{ST2}}, and {{IntServ}}).
+Providing benefits for early adopters can be key - if everyone must deploy a technology in order for the technology to provide benefits, or even to work at all, the technology is unlikely to be adopted. (See {{IntServ}} and {{Quick-Start}}).
 
-- Impact of a Path Aware technology requiring changes to operational practices can prevent deployment of promising technology. (See {{Shim6}}, including {{Addendum-MP-TCP}}).
+## Outperforming End-to-end Protocol Mechanisms {#Outperforming}
 
-- Per-connection state in intermediate devices can be an impediment to adoption and deployment. This is especially true as we move from the edge of the network into the routing core (See {{ST2}} and {{IntServ}}).
+Adaptive end-to-end protocol mechanisms may respond to feedback quickly enough that the additional realizable benefit from a new Path Aware mechanism may be much smaller than anticipated (see {{Quick-Start}} and {{TRIGTRAN}}). 
 
-- Many modern routers, especially high-end routers, have not been designed to make heavy use of in-band mechanisms such as IPv4 and IPv6 Router Alert Options (RAO), so operators can be reluctant to deploy technologies that rely on these mechanisms. (See {{NSIS}}).
+## Paying for Path Aware Technologies {#Paying}
 
-- If the endpoints do not have any trust relationship with the intermediate devices along a path, operators can be reluctant to deploy technologies that rely on endpoints sending unauthenticated control signals to routers. (See {{IntServ}} and {{NSIS}}. We also note this still remains a factor hindering deployment of DiffServ).
+"Follow the money." If operators can't charge for a Path Aware technology to recover the costs of deploying it, the benefits to the operator must be really significant. Corollary: If operators charge for a Path Aware technology, the benefits to the user must be significant enough to justify the cost. (See {{TRIGTRAN}}, {{ST2}}, and {{IntServ}}).
 
--  If intermediate devices along the path can't be trusted, it's unlikely that endpoints will rely on signals from intermediate devices to drive changes to endpoint behaviors. (See {{TRIGTRAN}}, {{Source-Quench}}). The lowest level of trust is sufficient for a device issuing a message to confirm that it has visibility of the packets on the path it is seeking to control {{RFC8085}} (e.g., an ICMP message included a quoted packet from the source). A higher level of trust can arise when a network device could have a long or short term trust relationship with the sender it controls.
+## Impact on Operational Practices {#OperationalImpact}
 
-- Because the Internet is a distributed system, if the distance that information from distant hosts and routers travels to a Path Aware host or router is sufficiently large, the information may no longer represent the state and situation at the distant host or router when it is received. In this case, the benefit that a Path Aware technology provides likely decreases. (See {{Quick-Start}}).
+Impact of a Path Aware technology requiring changes to operational practices can affect deployment of promising technology. These impacts may make deployment more likely, but often discourage deployment. (See {{Shim6}}, including {{Addendum-MP-TCP}}).
 
-- Providing a new feature/signal does not mean that it will be used. Endpoint stacks may not know how to effectively utilize Path-Aware transport protocol technologies, because the technology may require information from applications to permit them to work effectively, but applications may not a-priori know that information. Even if the application does know that information, the de-facto API has no way of signaling the expectations of applications for the network path. Providing this awareness requires an API that signals more than the packets to be sent. TAPS is exploring such an API {{TAPS-WG}}, yet even with such an API, policy is needed to bind the application expectations to the network characteristics. (See {{ST2}} and {{IntServ}}).
+## Per-connection State {#Per-connectionState}
+
+Per-connection state in intermediate devices can be an impediment to adoption and deployment. This is especially true as we move from the edge of the network into the routing core (See {{ST2}} and {{IntServ}}).
+
+## Keeping Traffic on Router Fast-paths {#Fast-paths}
+
+Many modern routers, especially high-end routers, have not been designed to make heavy use of in-band mechanisms such as IPv4 and IPv6 Router Alert Options (RAO), so operators can be reluctant to deploy technologies that rely on these mechanisms. (See {{NSIS}}).
+
+## Endpoints Trusting Intermediate Devices {#EndpointsTrustingIDs}
+
+If the endpoints do not have any trust relationship with the intermediate devices along a path, operators can be reluctant to deploy technologies that rely on endpoints sending unauthenticated control signals to routers. (See {{IntServ}} and {{NSIS}}. We also note this still remains a factor hindering deployment of DiffServ).
+
+## Intermediate Devices Trusting Endpoints {#IDsTrustingEndpoints}
+
+If intermediate devices along the path can't be trusted, it's unlikely that endpoints will rely on signals from intermediate devices to drive changes to endpoint behaviors. (See {{TRIGTRAN}}, {{Source-Quench}}). The lowest level of trust is sufficient for a device issuing a message to confirm that it has visibility of the packets on the path it is seeking to control {{RFC8085}} (e.g., an ICMP message included a quoted packet from the source). A higher level of trust can arise when a network device could have a long or short term trust relationship with the sender it controls.
+
+## Responding to Distant Signals {#ReactionTimes}
+
+Because the Internet is a distributed system, if the distance that information from distant hosts and routers travels to a Path Aware host or router is sufficiently large, the information may no longer represent the state and situation at the distant host or router when it is received. In this case, the benefit that a Path Aware technology provides likely decreases. (See {{Quick-Start}}).
+
+## Support in Endpoint Protocol Stacks {#ProtocolStackSupport}
+
+Providing a new feature/signal does not mean that it will be used. Endpoint stacks may not know how to effectively utilize Path-Aware transport protocol technologies, because the technology may require information from applications to permit them to work effectively, but applications may not a-priori know that information. Even if the application does know that information, the de-facto API has no way of signaling the expectations of applications for the network path. Providing this awareness requires an API that signals more than the packets to be sent. TAPS is exploring such an API {{TAPS-WG}}, yet even with such an API, policy is needed to bind the application expectations to the network characteristics. (See {{ST2}} and {{IntServ}}).
+
+# Are the Lessons We've Learned Still True?
+
+The initial scope for this document was roughly "what mistakes have we made in the decade prior to 
+{{PANRG-99}}, that we shouldn't make again". Some of the contributions in {{Contributions}} predate the initial scope. 
+The earliest Path-Aware Networking technique referred to in {{Contributions}} is {{ST2}}, published in the late 1970s. 
+Given that the networking ecosystem has evolved continuously, it's a reasonable question to ask whether the Lessons we've Learned are still true.
+
+The PANRG Research Group reviewed the Lessons Learned contained in the May 23, 2019 version of this document at IETF 105 {{PANRG-105-Min}}. The following table provides the "sense of the room" at that time. The intention was to capture whether a specific lesson seems to be well-understood and can be treated as invariant when evaluating proposed Path Aware Networking technologies, or whether that lesson should be treated as "there be dragons in this minefield, so further research is required". 
+
+| Lesson | Summary | Need Research? |
+| Overcoming Entropy | {{OvercomingEntropy}} | Invariant |
+| Providing Benefits for Early Adopters | {{EarlyAdopters}} | Invariant |
+| Outperforming End-to-end Protocol Mechanisms | {{Outperforming}} | Research |
+| Paying for Path Aware Technologies | {{Paying}} | Invariant |
+| Impact on Operational Practices | {{OperationalImpact}} | Invariant |
+| Per-connection State | {{Per-connectionState}} | Research |
+| Keeping Traffic on Router Fast-paths | {{Fast-paths}} | Research |
+| Endpoints Trusting Intermediate Devices | {{EndpointsTrustingIDs}} | Research |
+| Intermediate Devices Trusting Endpoints | {{IDsTrustingEndpoints}} | Research |
+| Responding to Distant Signals | {{ReactionTimes}} | Research |
+| Support in Endpoint Protocol Stacks | {{ProtocolStackSupport}} | Research |
+
+"Overcoming Entropy", "Providing Benefits for Early Adopters", "Paying for Path Aware Technologies", and "Impact on Operational Practice" were considered to be invariant - the sense of the room was that these would always be considerations for any proposed Path Aware Technology. 
+
+For "Outperforming End-to-end Protocol Mechanisms", there is a trade-off between improved performance from Path Aware Technologies and additional complexity required by some Path Aware Technologies. 
+
+* If you can obtain the same understanding of path characteristics from measurements obtained over a few more round trips, endpoint implementers are unlikely to be eager to add complexity, and many attributes can be measured from an endpoint, without assistance from intermediate devices. 
+
+For "Per-connection State", the key points discussed in the research group were "how much state", and "where state is maintained". 
+
+* IntServ ({{IntServ}}) required state at every intermediate device for every connection between two endpoints. As the Internet ecosystem has evolved, carrying many connections in a tunnel that appears to intermediate devices as a single connection has become more common, so that additional end-to-end connections don't add additional state to intermediate devices between tunnel endpoints. If these tunnels are encrypted, intermediate devices between tunnel endpoints can't distinguish between connections, even if that were desirable. 
+
+For "Keeping Traffic on Router Fast-paths", we noted that this was true for many routers, but not for all routers. 
+
+* For backbone routers, this is likely an invariant, but for routers that rely more on general-purpose computers to make forwarding decisions, this may not be a fatal flaw for Path Aware Networking technologies. 
+
+For "Endpoints Trusting Intermediate Devices" and "Intermediate Devices Trusting Endpoints", these lessons point to the broader need to revisit the Internet Threat Model. 
+
+* We noted with relief that discussions about this were already underway in the IETF community at IETF 105 (see the Security Area Open Meeting minutes {{SAAG-105-Min}} for discussion of {{draft-arkko-arch-internet-threat-model}} and {{draft-farrell-etm}}), but we recognize that there are Path Aware Networking aspects of this effort. 
+
+For "Responding to Distant Signals", we noted that not all attributes are equal. 
+
+* If an attribute is stable over an extended period of time, is difficult to observe via end-to-end mechanisms, and is valuable, Path Aware Technologies that rely on that attribute to provide a significant benefit become more attractive. 
+
+* Research to help identify attributes that are useful enough to justify deployment would be helpful.
+
+For "Support in Endpoint Protocol Stacks", we noted that current work in the TAPS working group ({{TAPS-WG}}) will justify consideration of the current state of play for Path Aware Networking proposals for some time to come. 
 
 # Template for Contributions {#TemplateContributions}
 
@@ -374,7 +468,7 @@ There are many things that could be said about the Path Aware networking technol
 - a short description of the reasons why the technology wasn't adopted
 - a short statement of the lessons that researchers can learn from our experience with this technology.
 
-This document is being built collaboratively. To contribute your experience, please send a Github pull request to https://github.com/panrg/draft-dawkins-panrg-what-not-to-do.
+This document has been built collaboratively. To contribute your experience, please send a Github pull request to https://github.com/panrg/draft-dawkins-panrg-what-not-to-do.
 
 # Contributions {#Contributions}
 
@@ -382,7 +476,7 @@ Additional contributions that provide Lessons Learned beyond those already captu
 
 ## Stream Transport (ST, ST2, ST2+) {#ST2}
 
-The suggested references for IntServ are:
+The suggested references for Stream Transport are:
 
 - ST - A Proposed Internet Stream Protocol {{IEN-119}}
 - Experimental Internet Stream Protocol, Version 2 (ST-II) {{RFC1190}}
@@ -743,7 +837,7 @@ Initial material for {{NSIS}} on Next Steps In Signaling (NSIS) was provided by 
 
 Initial material for {{FL}} on IPv6 Flow Labels was provided by Gorry Fairhurst. 
 
-Our thanks to C.M. Heard, Gorry Fairhurst, Joe Touch, Joeri de Ruiter, Roland Bless, Ruediger Geib, and Wes Eddy, who provided review comments on previous versions.
+Our thanks to C.M. Heard, David Black, Gorry Fairhurst, Joe Touch, Joeri de Ruiter, Roland Bless, Ruediger Geib, and Wes Eddy, who provided review comments on previous versions.
 
 Special thanks to Adrian Farrel for helping Spencer navigate the twisty little passages of Flow Specs and Filter Specs in IntServ, RSVP, MPLS, and BGP. They are all alike, except for the differences {{Colossal-Cave}}.
 
