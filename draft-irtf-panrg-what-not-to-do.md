@@ -343,11 +343,13 @@ As an Informational document published in the IRTF stream, this document has no 
 
 The current definition of "Path Awareness", used by the Path Aware Networking Research Group, appears in the Introduction of {{I-D.irtf-panrg-questions}}.
 
-Because this document reflects work performed over several decades, some technologies described in {{Contributions}} may not reflect the current definition, but these technologies were considered "path aware" by their contributors, so are included in this retrospective document. 
+Because this document reflects work performed over several decades, some technologies described in {{Contributions}} may not reflect the current definition, but these technologies were considered "path aware" by their contributors, so these contributions are included in this retrospective document. 
 
 ## Note to RFC Editor
 
-The pointer in {{PANdef}} to the Introduction of {{I-D.irtf-panrg-questions}} is correct as of this writing, but since the definition is likely to be included by PANRG drafts, Spencer has asked that it be placed in its own section, so that people can find the defintion more easily - it's at the bottom of the second page of Introduction. If the section header changes in {{I-D.irtf-panrg-questions}}, the pointer in this document should be changed as well. 
+The pointer in {{PANdef}} to the definition at the Introduction of {{I-D.irtf-panrg-questions}} is correct as of this writing, but since the definition is likely to be included by other PANRG drafts, Spencer has asked that the definition be placed in its own section, so that people can find the definition more easily - As of this writing, it's at the bottom of the second page of Introduction. If the section header changes in {{I-D.irtf-panrg-questions}}, the pointer in this document should be changed as well. 
+
+Whether that happens or not, the RFC Editor is requested to remove this section. 
 
 ## A Note About Path-Aware Techniques Included In This Document
 
