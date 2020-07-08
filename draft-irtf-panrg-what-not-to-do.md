@@ -345,7 +345,7 @@ The current definition of "Path Awareness", used by the Path Aware Networking Re
 
 Because this document reflects work performed over several decades, some technologies described in {{Contributions}} may not reflect the current definition, but these technologies were considered "path aware" by their contributors, so are included in this retrospective document. 
 
-## Note to Research Group
+## Note to RFC Editor
 
 The pointer in {{PANdef}} to the Introduction of {{I-D.irtf-panrg-questions}} is correct as of this writing, but since the definition is likely to be included by PANRG drafts, Spencer has asked that it be placed in its own section, so that people can find the defintion more easily - it's at the bottom of the second page of Introduction. If the section header changes in {{I-D.irtf-panrg-questions}}, the pointer in this document should be changed as well. 
 
