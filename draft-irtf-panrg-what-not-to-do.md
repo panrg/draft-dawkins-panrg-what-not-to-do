@@ -1,7 +1,7 @@
 ---
 title: "Path Aware Networking: Obstacles to Deployment (A Bestiary of Roads Not Taken)"
 abbrev: What Not To Do
-docname: draft-irtf-panrg-what-not-to-do-10
+docname: draft-irtf-panrg-what-not-to-do-12
 date: 
 category: info
 submissiontype: IRTF
@@ -31,11 +31,9 @@ author:
     email: spencerdawkins.ietf@gmail.com
     role: editor
 
-normative:
+informative:
 
   I-D.irtf-panrg-questions:
-
-informative:
 
   RFC0792:
   
@@ -230,8 +228,8 @@ informative:
         name: Arjuna Sathiaseelan
         ins: A. Sathiaseelan        
       - 
-        name: Francesco Potortì
-        ins: F. Potortì     
+        name: Francesco Potorti
+        ins: F. Potorti
       - 
         name: Alberto Gotta
         ins: A. Gotta   
@@ -341,13 +339,26 @@ As an Informational document published in the IRTF stream, this document has no 
 
 ## What Does "Path Awareness" Mean in this Document? {#PANdef}
 
-The current definition of "Path Awareness", used by the Path Aware Networking Research Group, appears in the Introduction of {{I-D.irtf-panrg-questions}}.
+The current definition of "Path Awareness", used by the Path Aware Networking Research Group, appears in Section 1.1 ("Definition") in {{I-D.irtf-panrg-questions}}. That definition is included here as a convenience to the reader. 
+
+<blockquote>
+   For purposes of this document, "path aware networking" describes
+   endpoint discovery of the properties of paths they use for
+   communication, and endpoint reaction to these properties that affects
+   routing and/or transmission; note that this can and already does
+   happen to some extent in the current Internet architecture.
+   Expanding on this definition, a "path aware internetwork" is one in
+   which endpoint discovery of path properties and endpoint selection of
+   paths used by traffic exchanged by the endpoint are explicitly
+   supported, regardless of the specific design of the protocol features
+   which enable this discovery and selection.
+</blockquote>
 
 Because this document reflects work performed over several decades, some technologies described in {{Contributions}} may not reflect the current definition, but these technologies were considered "path aware" by their contributors, so these contributions are included in this retrospective document. 
 
 ## Note to RFC Editor
 
-The pointer in {{PANdef}} to the definition at the Introduction of {{I-D.irtf-panrg-questions}} is correct as of this writing, but since the definition is likely to be included by other PANRG drafts, Spencer has asked that the definition be placed in its own section, so that people can find the definition more easily - As of this writing, it's at the bottom of the second page of Introduction. If the section header changes in {{I-D.irtf-panrg-questions}}, the pointer in this document should be changed as well. 
+If the "Definition" in Section 1.1 ("Definition") of {{I-D.irtf-panrg-questions}} changes, the text in {{PANdef}} of this document should be should be changed as well. 
 
 Whether that happens or not, the RFC Editor is requested to remove this section. 
 
