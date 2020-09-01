@@ -1,7 +1,7 @@
 ---
 title: "Path Aware Networking: Obstacles to Deployment (A Bestiary of Roads Not Taken)"
 abbrev: What Not To Do
-docname: draft-irtf-panrg-what-not-to-do-12
+docname: draft-irtf-panrg-what-not-to-do-13
 date: 
 category: info
 submissiontype: IRTF
@@ -330,6 +330,8 @@ The meta-lessons from that experience were
 Allison Mankin, as IRTF Chair, officially chartered the Path Aware Networking Research Group in July, 2018. 
 
 This document contains the analysis performed by that research group ({{LessonsLearned}}), based on that catalog ({{Contributions}}). 
+
+This document represents the consensus of the Path Aware Networking Research Group. 
 
 ## Purpose of This Document
 
