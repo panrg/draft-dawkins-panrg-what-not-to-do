@@ -3,6 +3,7 @@
 *.html
 *.pdf
 *.upload
+*.bak
 .tags
 *~
 *.swp
