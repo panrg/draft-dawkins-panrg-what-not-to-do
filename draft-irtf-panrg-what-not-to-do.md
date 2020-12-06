@@ -1,7 +1,7 @@
 ---
 title: "Path Aware Networking: Obstacles to Deployment (A Bestiary of Roads Not Taken)"
 abbrev: What Not To Do
-docname: draft-irtf-panrg-what-not-to-do-13
+docname: draft-irtf-panrg-what-not-to-do-14
 date: 
 category: info
 submissiontype: IRTF
@@ -291,10 +291,6 @@ informative:
       "NANOG": "North American Network Operator Group"
     date: October 2005
     target: https://www.youtube.com/watch?v=ji6Y_rYHAQs
-
-  TAPS-WG:
-    target: https://datatracker.ietf.org/wg/taps/about/
-    title: "Transport Services Working Group Home Page"
  
   TRIGTRAN-55:
     target: https://www.ietf.org/proceedings/55/239.htm 
@@ -308,36 +304,14 @@ informative:
  
 --- abstract
 
-At the first meeting of the Path Aware Networking Research Group, the research group agreed to catalog and analyze past efforts to develop and deploy  Path Aware techniques, most of which were unsuccessful or at most partially successful, in order to extract insights and lessons for path-aware networking researchers.
+At the first meeting of the Path Aware Networking Research Group, the research group agreed to catalog and analyze past efforts to develop and deploy Path Aware techniques, most of which were unsuccessful or at most partially successful, in order to extract insights and lessons for path-aware networking researchers.
 
 This document contains that catalog and analysis.
 
 --- middle
 # Introduction
 
-At the first meeting of the Path Aware Networking Research Group {{PANRG}}, at IETF 99 {{PANRG-99}}, Olivier Bonaventure led a discussion of "A Decade of Path Awareness" {{PATH-Decade}}, on attempts, which were mostly unsuccessful for a variety of reasons, to exploit Path Aware techniques and achieve a variety of goals over the past decade. At the end of that discussion, two things were abundantly clear. 
-
-- The Internet community has accumulated considerable experience with many Path Aware techniques over a long period of time, and
-
-- Although some path aware techniques have been deployed (for example, Differentiated Services, or DiffServ {{RFC2475}}), most of these techniques haven't seen widespread adoption and deplyment. Even "successful" techniques like DiffServ can face obstacles that prevents wider usage. The reasons for non-adoption and limited adoption and deployment are many, and are worthy of study.
-
-The meta-lessons from that experience were
-
-- Path aware networking has been more Research than Engineering, so establishing an IRTF Research Group for Path Aware Networking is the right thing to do {{RFC7418}}.
-
-- Analyzing a catalog of past experience to learn the reasons for non-adoption would be a great first step for the Research Group.
-
-Allison Mankin, as IRTF Chair, officially chartered the Path Aware Networking Research Group in July, 2018. 
-
-This document contains the analysis performed by that research group ({{LessonsLearned}}), based on that catalog ({{Contributions}}). 
-
-This document represents the consensus of the Path Aware Networking Research Group. 
-
-## Purpose of This Document
-
-This Informational document discusses protocol mechanisms considered, and in some cases standardized, by the Internet Engineering Task Force (IETF), and considers Lessons Learned from those mechanisms. The intention is to inform the work of protocol designers, whether in the IRTF, the IETF, or elsewhere in the Internet ecosystem. 
-
-As an Informational document published in the IRTF stream, this document has no authority beyond the quality of the analysis it contains. 
+This document describes the lessons that IETF participants have learned (and learned the hard way) about Path Aware Networking over a period of several decades, and provides an analysis of reasons why various Path Aware Networking techniques have seen limited or no deployment. 
 
 ## What Does "Path Awareness" Mean in this Document? {#PANdef}
 
@@ -363,6 +337,32 @@ Because this document reflects work performed over several decades, some technol
 If the "Definition" in Section 1.1 ("Definition") of {{I-D.irtf-panrg-questions}} changes, the text in {{PANdef}} of this document should be should be changed as well. 
 
 Whether that happens or not, the RFC Editor is requested to remove this section. 
+
+# A Perspective On This Document {#perspective}
+
+At the first meeting of the Path Aware Networking Research Group {{PANRG}}, at IETF 99 {{PANRG-99}}, Olivier Bonaventure led a discussion of "A Decade of Path Awareness" {{PATH-Decade}}, on attempts, which were mostly unsuccessful for a variety of reasons, to exploit Path Aware techniques and achieve a variety of goals over the past decade. At the end of that discussion, two things were abundantly clear. 
+
+- The Internet community has accumulated considerable experience with many Path Aware techniques over a long period of time, and
+
+- Although some path aware techniques have been deployed (for example, Differentiated Services, or DiffServ {{RFC2475}}), most of these techniques haven't seen widespread adoption and deplyment. Even "successful" techniques like DiffServ can face obstacles that prevents wider usage. The reasons for non-adoption and limited adoption and deployment are many, and are worthy of study.
+
+The meta-lessons from that experience were
+
+- Path aware networking has been more Research than Engineering, so establishing an IRTF Research Group for Path Aware Networking is the right thing to do {{RFC7418}}.
+
+- Analyzing a catalog of past experience to learn the reasons for non-adoption would be a great first step for the Research Group.
+
+Allison Mankin, as IRTF Chair, officially chartered the Path Aware Networking Research Group in July, 2018. 
+
+This document contains the analysis performed by that research group ({{LessonsLearned}}), based on that catalog ({{Contributions}}). 
+
+This document represents the consensus of the Path Aware Networking Research Group. 
+
+## Notes for the Reader
+
+This Informational document discusses Path Aware protocol mechanisms considered, and in some cases standardized, by the Internet Engineering Task Force (IETF), and considers Lessons Learned from those mechanisms. The intention is to inform the work of protocol designers, whether in the IRTF, the IETF, or elsewhere in the Internet ecosystem. 
+
+As an Informational document published in the IRTF stream, this document has no authority beyond the quality of the analysis it contains. 
 
 ## A Note About Path-Aware Techniques Included In This Document
 
@@ -390,67 +390,23 @@ Several of the Lessons Learned in {{LessonsLearned}} reflect considerations desc
 
 The terms Node and Element in this document have the meaning defined in {{PathProp}}. 
 
-# Summary of Lessons Learned {#LessonsLearned}
+## Methodology for Contributions {#TemplateContributions}
 
-This section summarizes the Lessons Learned from the contributed subsections in {{Contributions}}.
+This document grew out of contributions by various IETF participants with experience with one or more Path Aware Networking techniques. 
 
-Each Lesson Learned is tagged with one or more contributions that encountered this obstacle as a significant impediment to deployment. Other contributed techniques may have also encountered this obstacle, but this obstacle may not have been the biggest impediment to deployment for those techniques. 
+There are many things that could be said about the Path Aware networking techniques that have been developed. For the purposes of this document, contributors were requested to provide
 
-It is useful to notice that sometimes an obstacle might impede deployment, while at other times, the same obstacle might prevent adoption and deployment entirely. The research group discussed distinguishing between obstacles that impede and obstacles that prevent, but it appears that the boundary between "impede" and "prevent" can shift over time - some of the Lessons Learned are based on both Path Aware techniques that were not deployed, and Path Aware techniques that were deployed, but were not deployed widely or quickly. See {{Shim6}} and {{Addendum-MP-TCP}} as one example of this shifting boundary. 
+- the name of a technique, including an abbreviation if one was used
+- if available, a long-term pointer to the best reference describing the technique
+- a short description of the problem the technique was intended to solve
+- a short description of the reasons why the technique wasn't adopted
+- a short statement of the lessons that researchers can learn from our experience with this technique.
 
-## Justifying Deployment {#JustifyingDeployment}
+# Applying the Lessons We've Learned {#applying}
 
-The benefit of Path Awareness must be great enough to justify making changes in an operational network. The colloquial American English expression, "If it ain't broke, don't fix it" is a "best current practice" on today's Internet. (See {{Quick-Start}}, {{TRIGTRAN}}, and {{Source-Quench}}).
+The initial scope for this document was roughly "what mistakes have we made in the decade prior to {{PANRG-99}}, that we shouldn't make again". Some of the contributions in {{Contributions}} predate the initial scope. The earliest Path-Aware Networking technique referred to in {{Contributions}} is {{ST2}}, published in the late 1970s. Given that the networking ecosystem has evolved continuously, it seems reasonable to consider how to apply these lessons.
 
-## Providing Benefits for Early Adopters {#EarlyAdopters}
-
-Providing benefits for early adopters can be key - if everyone must deploy a technique in order for the technique to provide benefits, or even to work at all, the technique is unlikely to be adopted widely or quickly. (See {{IntServ}} and {{Quick-Start}}).
-
-## Providing Benefits During Partial Deployment {#PartialDeployment}
-
-Some proposals require that all path elements along the full length of the path must be upgraded to support a new technique, before any benefits can be seen. This is likely to require coordination between operators who control a subset of path elements, and between operators and end users if endpoint upgrades are required. If a technique provides benefits when only a part of the path has been upgraded, this is likely to encourage adoption and deployment. (See {{IntServ}} and {{Quick-Start}}). 
-
-## Outperforming End-to-end Protocol Mechanisms {#Outperforming}
-
-Adaptive end-to-end protocol mechanisms may respond to feedback quickly enough that the additional realizable benefit from a new Path Aware mechanism that tries to manipulate nodes along a path, or observe the attributes of nodes along a path, may be much smaller than anticipated ({{Quick-Start}} and {{TRIGTRAN}}). 
-
-## Paying for Path Aware Techniques {#Paying}
-
-"Follow the money." If operators can't charge for a Path Aware technique to recover the costs of deploying it, the benefits to the operator must be really significant. Corollary: If operators charge for a Path Aware technique, the benefits to users of that Path Aware technique must be significant enough to justify the cost. (See {{ST2}}, {{IntServ}}, and {{TRIGTRAN}}).
-
-## Impact on Operational Practices {#OperationalImpact}
-
-Impact of a Path Aware technique requiring changes to operational practices can affect how quickly or widely a promising technique is deployed. These impacts may make deployment more likely, but often discourage deployment. (See {{Shim6}}, including {{Addendum-MP-TCP}}).
-
-## Per-connection State {#Per-connectionState}
-
-Per-connection state in intermediate nodes has been an impediment to adoption and deployment in the past. This is especially true as we move from the edge of the network, further into the routing core (See {{ST2}} and {{IntServ}}).
-
-## Keeping Traffic on Fast-paths {#Fast-paths}
-
-Many modern platforms, especially high-end routers, have been designed with hardware that can make simple per-packet forwarding decisions ("fast-paths"), but have not been designed to make heavy use of in-band mechanisms such as IPv4 and IPv6 Router Alert Options (RAO) that require more processing to make forwarding decisions. Packets carrying in-band mechanisms are diverted to other processors in the router with much lower packet processing rates. Operators can be reluctant to deploy techniques that rely heavily on in-band mechanisms because they may significantly reduce packet throughput. (See {{NSIS}}).
-
-## Endpoints Trusting Intermediate Nodes {#EndpointsTrustingIDs}
-
-If intermediate nodes along the path can't be trusted, it's unlikely that endpoints will rely on signals from intermediate nodes to drive changes to endpoint behaviors. (See {{TRIGTRAN}}, {{Source-Quench}}). We note that "trust" is not binary - one, low, level of trust applies when a node issuing a message can confirm that it has visibility of the packets on the path it is seeking to control {{RFC8085}} (e.g., an ICMP message included a quoted packet from the source). A higher level of trust can arise when an endpoint has established a short term, or even long term, trust relationship with network nodes.
-
-## Intermediate Nodes Trusting Endpoints {#IDsTrustingEndpoints}
-
-If the endpoints do not have any trust relationship with the intermediate nodes along a path, operators have been reluctant to deploy techniques that rely on endpoints sending unauthenticated control signals to routers. (See {{IntServ}} and {{NSIS}}. We also note this still remains a factor hindering deployment of DiffServ).
-
-## Reacting to Distant Signals {#ReactionTimes}
-
-Because the Internet is a distributed system, if the distance that information from distant path elements travels to a Path Aware host is sufficiently large, the information may no longer accurately represent the state and situation at the distant host or elements along the path when it is received locally. In this case, the benefit that a Path Aware technique provides will be inconsistent, and may not always be beneficial. (See {{Quick-Start}}).
-
-## Support in Endpoint Protocol Stacks {#ProtocolStackSupport}
-
-Just because a protocol stack provides a new feature/signal does not mean that applications will use the feature/signal. Protocol stacks may not know how to effectively utilize Path-Aware techniques, because the protocol stack may require information from applications to permit the technique to work effectively, but applications may not a-priori know that information. Even if the application does know that information, the de-facto sockets API has no way of signaling application expectations for the network path to the protocol stack. In order for applications to provide these expectations to protocol stacks, we need an API that signals more than the packets to be sent. TAPS is exploring such an API {{TAPS-WG}}, yet even with such an API, policy is needed to bind the application expectations to the network characteristics. (See {{ST2}} and {{IntServ}}).
-
-# Do We Understand the Lessons We've Learned?
-
-The initial scope for this document was roughly "what mistakes have we made in the decade prior to {{PANRG-99}}, that we shouldn't make again". Some of the contributions in {{Contributions}} predate the initial scope. The earliest Path-Aware Networking technique referred to in {{Contributions}} is {{ST2}}, published in the late 1970s. Given that the networking ecosystem has evolved continuously, it seemed reasonable to ask whether the Lessons we've Learned are still true.
-
-The PANRG Research Group reviewed the Lessons Learned contained in the May 23, 2019 version of this document at IETF 105 {{PANRG-105-Min}}, and carried out additional discussion at IETF 106 {{PANRG-106-Min}}. {{thefuture}} provides the "sense of the room" after those discussions. The intention is to capture whether a specific lesson seems to be 
+The PANRG Research Group reviewed the Lessons Learned ({{LessonsLearned}}) contained in the May 23, 2019 version of this document at IETF 105 {{PANRG-105-Min}}, and carried out additional discussion at IETF 106 {{PANRG-106-Min}}. {{thefuture}} provides the "sense of the room" about each lesson after those discussions. The intention is to capture whether a specific lesson seems to be 
 
 + "Invariant" - well-understood and is likely to be applicable for any proposed Path Aware Networking solution.
 + "Variable" - has impeded deployment in the past, but might not be applicable in a specific technique. Engineering analysis to understand whether the lesson is applicable is prudent.
@@ -497,21 +453,71 @@ For "Reacting to Distant Signals", we noted that not all attributes are equal.
 
 * Analysis to help identify attributes that are useful enough to justify deployment of Path Aware techniques that make use of those attributes would be helpful.
 
-For "Support in Endpoint Protocol Stacks", we noted that current work in the TAPS working group ({{TAPS-WG}}) could provide an API that allows applications to more easily make use of Path Aware techniques, but this isn't guaranteed.
+For "Support in Endpoint Protocol Stacks", we noted that Path Aware applications must be able to identify and communicate requirements about path characteristics. 
 
-# Template for Contributions {#TemplateContributions}
+* The de-facto sockets API has no way of signaling application expectations for the network path to the protocol stack.
 
-There are many things that could be said about the Path Aware networking techniques that have been developed. For the purposes of this document, contributors were requested to provide
+# Summary of Lessons Learned {#LessonsLearned}
 
-- the name of a technique, including an abbreviation if one was used
-- if available, a long-term pointer to the best reference describing the technique
-- a short description of the problem the technique was intended to solve
-- a short description of the reasons why the technique wasn't adopted
-- a short statement of the lessons that researchers can learn from our experience with this technique.
+This section summarizes the Lessons Learned from the contributed subsections in {{Contributions}}.
+
+Each Lesson Learned is tagged with one or more contributions that encountered this obstacle as a significant impediment to deployment. Other contributed techniques may have also encountered this obstacle, but this obstacle may not have been the biggest impediment to deployment for those techniques. 
+
+It is useful to notice that sometimes an obstacle might impede deployment, while at other times, the same obstacle might prevent adoption and deployment entirely. The research group discussed distinguishing between obstacles that impede and obstacles that prevent, but it appears that the boundary between "impede" and "prevent" can shift over time - some of the Lessons Learned are based on both Path Aware techniques that were not deployed, and Path Aware techniques that were deployed, but were not deployed widely or quickly. See {{Shim6}} and {{Addendum-MP-TCP}} as one example of this shifting boundary. 
+
+## Justifying Deployment {#JustifyingDeployment}
+
+The benefit of Path Awareness must be great enough to justify making changes in an operational network. The colloquial U.S. American English expression, "If it ain't broke, don't fix it" is a "best current practice" on today's Internet. (See {{Quick-Start}}, {{TRIGTRAN}}, and {{Source-Quench}}, in addition to {{RFC5218}}).
+
+## Providing Benefits for Early Adopters {#EarlyAdopters}
+
+Providing benefits for early adopters can be key - if everyone must deploy a technique in order for the technique to provide benefits, or even to work at all, the technique is unlikely to be adopted widely or quickly. (See {{IntServ}} and {{Quick-Start}}, in addition to {{RFC5218}}).
+
+## Providing Benefits During Partial Deployment {#PartialDeployment}
+
+Some proposals require that all path elements along the full length of the path must be upgraded to support a new technique, before any benefits can be seen. This is likely to require coordination between operators who control a subset of path elements, and between operators and end users if endpoint upgrades are required. If a technique provides benefits when only a part of the path has been upgraded, this is likely to encourage adoption and deployment. (See {{IntServ}} and {{Quick-Start}}, in addition to {{RFC5218}}). 
+
+## Outperforming End-to-end Protocol Mechanisms {#Outperforming}
+
+Adaptive end-to-end protocol mechanisms may respond to feedback quickly enough that the additional realizable benefit from a new Path Aware mechanism that tries to manipulate nodes along a path, or observe the attributes of nodes along a path, may be much smaller than anticipated ({{Quick-Start}} and {{TRIGTRAN}}). 
+
+## Paying for Path Aware Techniques {#Paying}
+
+"Follow the money." If operators can't charge for a Path Aware technique to recover the costs of deploying it, the benefits to the operator must be really significant. Corollary: If operators charge for a Path Aware technique, the benefits to users of that Path Aware technique must be significant enough to justify the cost. (See {{ST2}}, {{IntServ}}, and {{TRIGTRAN}}).
+
+## Impact on Operational Practices {#OperationalImpact}
+
+Impact of a Path Aware technique requiring changes to operational practices can affect how quickly or widely a promising technique is deployed. The impacts of these changes may make deployment more likely, but often discourage deployment. (See {{Shim6}}, including {{Addendum-MP-TCP}}).
+
+## Per-connection State {#Per-connectionState}
+
+Per-connection state in intermediate nodes has been an impediment to adoption and deployment in the past, because of added cost and complexity. Often, similar benefits can be achieved with much less finely-grained state. This is especially true as we move from the edge of the network, further into the routing core (See {{ST2}} and {{IntServ}}).
+
+## Keeping Traffic on Fast-paths {#Fast-paths}
+
+Many modern platforms, especially high-end routers, have been designed with hardware that can make simple per-packet forwarding decisions ("fast-paths"), but have not been designed to make heavy use of in-band mechanisms such as IPv4 and IPv6 Router Alert Options (RAO) that require more processing to make forwarding decisions. Packets carrying in-band mechanisms are diverted to other processors in the router with much lower packet processing rates. Operators can be reluctant to deploy techniques that rely heavily on in-band mechanisms because they may significantly reduce packet throughput. (See {{NSIS}}).
+
+## Endpoints Trusting Intermediate Nodes {#EndpointsTrustingIDs}
+
+If intermediate nodes along the path can't be trusted, it's unlikely that endpoints will rely on signals from intermediate nodes to drive changes to endpoint behaviors. (See {{TRIGTRAN}}, {{Source-Quench}}). We note that "trust" is not binary - one, low, level of trust applies when a node issuing a message can confirm that it has visibility of the packets on the path it is seeking to control {{RFC8085}} (e.g., an ICMP message included a quoted packet from the source). A higher level of trust can arise when an endpoint has established a short term, or even long term, trust relationship with network nodes.
+
+## Intermediate Nodes Trusting Endpoints {#IDsTrustingEndpoints}
+
+If the endpoints do not have any trust relationship with the intermediate nodes along a path, operators have been reluctant to deploy techniques that rely on endpoints sending unauthenticated control signals to routers. (See {{IntServ}} and {{NSIS}}. We also note this still remains a factor hindering deployment of DiffServ).
+
+## Reacting to Distant Signals {#ReactionTimes}
+
+Because the Internet is a distributed system, if the distance that information from distant path elements travels to a Path Aware host is sufficiently large, the information may no longer accurately represent the state and situation at the distant host or elements along the path when it is received locally. In this case, the benefit that a Path Aware technique provides will be inconsistent, and may not always be beneficial. (See {{Quick-Start}}).
+
+## Support in Endpoint Protocol Stacks {#ProtocolStackSupport}
+
+Just because a protocol stack provides a new feature/signal does not mean that applications will use the feature/signal. Protocol stacks may not know how to effectively utilize Path-Aware techniques, because the protocol stack may require information from applications to permit the technique to work effectively, but applications may not a-priori know that information. Even if the application does know that information, the de-facto sockets API has no way of signaling application expectations for the network path to the protocol stack. In order for applications to provide these expectations to protocol stacks, we need an API that signals more than the packets to be sent. (See {{ST2}} and {{IntServ}}).
 
 # Contributions {#Contributions}
 
 Contributions on these Path Aware networking techniques were analyzed to arrive at the Lessons Learned captured in {{LessonsLearned}}. 
+
+Our expectation is that most readers will not need to read through this section carefully, but we wanted to record these hard-fought lessons as a service to others who may revisit this document, so they'll have the details close at hand. 
 
 ## Stream Transport (ST, ST2, ST2+) {#ST2}
 
@@ -876,6 +882,8 @@ Initial material for {{NSIS}} on Next Steps In Signaling (NSIS) was provided by 
 Initial material for {{FL}} on IPv6 Flow Labels was provided by Gorry Fairhurst. 
 
 Our thanks to C.M. Heard, David Black, Gorry Fairhurst, Joe Touch, Joeri de Ruiter, Mohamed Boucadair, Roland Bless, Ruediger Geib, Theresa Enghardt, and Wes Eddy, who provided review comments on previous versions.
+
+Mallory Knodel reviewed this document for the Internet Engineering Steering Group, and provided many helpful suggestions. 
 
 Special thanks to Adrian Farrel for helping Spencer navigate the twisty little passages of Flow Specs and Filter Specs in IntServ, RSVP, MPLS, and BGP. They are all alike, except when they are different {{Colossal-Cave}}.
 
