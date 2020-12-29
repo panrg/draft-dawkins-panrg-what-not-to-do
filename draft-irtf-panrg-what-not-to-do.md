@@ -1,7 +1,7 @@
 ---
 title: "Path Aware Networking: Obstacles to Deployment (A Bestiary of Roads Not Taken)"
 abbrev: What Not To Do
-docname: draft-irtf-panrg-what-not-to-do-14
+docname: draft-irtf-panrg-what-not-to-do-15
 date: 
 category: info
 submissiontype: IRTF
@@ -34,6 +34,12 @@ author:
 informative:
 
   I-D.irtf-panrg-questions:
+  
+  I-D.ietf-tsvwg-intserv-multiple-tspec:
+
+  I-D.arkko-arch-internet-threat-model:
+
+  I-D.farrell-etm:
 
   RFC0792:
   
@@ -114,25 +120,21 @@ informative:
   RFC8085:
   
   RFC8170:
+ 
+  RFC8655:
+  
+  RFC8793:
 
   Colossal-Cave:
     target: https://en.wikipedia.org/wiki/Colossal_Cave_Adventure
     title: "Wikipedia Page for Colossal Cave Adventure"
     date: Retrieved January 2019
 
-  draft-arkko-arch-internet-threat-model:
-    title: "Changes in the Internet Threat Model" 
-    target: https://datatracker.ietf.org/doc/draft-arkko-arch-internet-threat-model/
-    author: 
-      ins: J. Arkko 
-      name: Jari Arkko
+  Conviva:
+    target: https://www.conviva.com/datasheets/precision-delivery-intelligence/
+    title: "Conviva Precision : Data Sheet"
+    date: Retrieved December 2020
 
-  draft-farrell-etm:
-    title: "We're gonna need a bigger threat model" 
-    target: https://datatracker.ietf.org/doc/draft-farrell-etm/
-    author: 
-      ins: S. Farrell 
-      name: Stephen Farrell 
 
   IEN-119: 
     title: "ST - A Proposed Internet Stream Protocol" 
@@ -158,6 +160,11 @@ informative:
   MP-TCP:
     target: https://datatracker.ietf.org/wg/mptcp/about/
     title: "Multipath TCP Working Group Home Page"
+  
+  MOPS-109-Min:
+    target: https://datatracker.ietf.org/meeting/109/materials/minutes-109-mops-00
+    title: "Media Operations Working Group - IETF-109 Minutes"
+    date: November 2020
 
   model-t:
     target: https://www.iab.org/mailman/listinfo/model-t
@@ -445,7 +452,7 @@ For "Keeping Traffic on Fast-paths", we noted that this was true for many platfo
 
 For "Endpoints Trusting Intermediate Nodes" and "Intermediate Nodes Trusting Endpoints", these lessons point to the broader need to revisit the Internet Threat Model. 
 
-* We noted with relief that discussions about this were already underway in the IETF community at IETF 105 (see the Security Area Open Meeting minutes {{SAAG-105-Min}} for discussion of {{draft-arkko-arch-internet-threat-model}} and {{draft-farrell-etm}}), and the Internet Architecture Board has created a mailing list for continued discussions ({{model-t}}), but we recognize that there are Path Aware Networking aspects of this effort, requiring research. 
+* We noted with relief that discussions about this were already underway in the IETF community at IETF 105 (see the Security Area Open Meeting minutes {{SAAG-105-Min}} for discussion of {{I-D.arkko-arch-internet-threat-model}} and {{I-D.farrell-etm}}), and the Internet Architecture Board has created a mailing list for continued discussions ({{model-t}}), but we recognize that there are Path Aware Networking aspects of this effort, requiring research. 
 
 For "Reacting to Distant Signals", we noted that not all attributes are equal. 
 
@@ -513,6 +520,22 @@ Because the Internet is a distributed system, if the distance that information f
 
 Just because a protocol stack provides a new feature/signal does not mean that applications will use the feature/signal. Protocol stacks may not know how to effectively utilize Path-Aware techniques, because the protocol stack may require information from applications to permit the technique to work effectively, but applications may not a-priori know that information. Even if the application does know that information, the de-facto sockets API has no way of signaling application expectations for the network path to the protocol stack. In order for applications to provide these expectations to protocol stacks, we need an API that signals more than the packets to be sent. (See {{ST2}} and {{IntServ}}).
 
+# Future Work {#Futures}
+
+By its nature, this document has been retrospective. In addition to considering how the Lessons Learned to date apply to current and future Path Aware networking proposals, it's also worth considering whether there is deeper investigation left to do. 
+
+- We note that this work was based on contributions from experts on various Path Aware networking techniques, and all of the contributed techniques involved unicast protocols. We didn't consider how these lessons might apply to multicast, and, given anecdotal reports at the IETF 109 MOPS working group meeting of IP multicast offerings within data centers at one or more cloud providers ({{MOPS-109-Min}}), it might be useful to think about path awareness in multicast, before we have a history of unsuccessful deployments to document. 
+
+- The question of whether a mechanism supports admission control, based on either endpoints or applications, is associated with Path Awareness. One of the motivations of IntServ and a number of other architectures (e.g. Deterministic Networking, {{RFC8655}}) is the ability to "say no" to an application based on resource availability on a path, before the application tries to inject traffic onto that path and discovers the path does not have the capacity to sustain enough utility to meet the application's minimum needs. The question of whether admission control is needed comes up repeatedly, but we have learned a few useful lessons that, while covered implicitly in some of the lessons learned of the document, might be explained explicitly:
+
+   - We have gained a lot of experience with application-based adaptation since the days where applications just injected traffic in-elastically into the network. Such adaptations seem to work well enough that admission control is of less value to these applications 
+
+   - There are end-to-end measurement techniques that can steer traffic at the application layer (Content Distribution Networks, multi-CDNs like Conviva {{Conviva}}, etc.)
+
+   - We noted in {{ProtocolStackSupport}} that applications often don't know how to utilize Path Aware techniques. This includes not knowing enough about their admission control threshold to be able to ask accurately for the resources they need, whether this is because the application itself doesn't know, or because the application has no way to signal its expectations to the underlying protocol stack. To date, attempts to help them haven't gotten anywhere (e.g. the multiple-TSPEC additions to RSVP to attempt to mirror codec selection by applications {{I-D.ietf-tsvwg-intserv-multiple-tspec}} expired in 2013).
+
+- We note that this work took the then-current IP network architecture as given, at least at the time each technique was proposed. It might be useful to consider aspects of the now-current IP network architecture that ease, or impede, Path Aware networking techniques. For example, there is limited ability in IP to constrain bidirectional paths to be symmetric, and information-centric networking protocols such as Named Data Networking (NDN) and Content-Centric Networking (CCNx) ({{RFC8793}}) must force bidirectional path symmetry using protocol-specific mechanisms. 
+
 # Contributions {#Contributions}
 
 Contributions on these Path Aware networking techniques were analyzed to arrive at the Lessons Learned captured in {{LessonsLearned}}. 
@@ -557,7 +580,7 @@ The suggested references for IntServ are:
 
 In 1994, when the IntServ architecture document {{RFC1633}} was published, real-time traffic was first appearing on the Internet. At that time, bandwidth was still a scarce commodity. Internet Service Providers built networks over DS3 (45 Mbps) infrastructure, and sub-rate (< 1 Mpbs) access was common. Therefore, the IETF anticipated a need for a fine-grained QoS mechanism.
 
-In the IntServ architecture, some  applications can require service guarantees. Therefore, those applications use the Resource Reservation Protocol (RSVP) {{RFC2205}} to signal  QoS  reservations across network paths.  Every router in the network maintains per-flow soft-state to a) perform call admission control and b) deliver guaranteed service.
+In the IntServ architecture, some  applications can require service guarantees. Therefore, those applications use the Resource Reservation Protocol (RSVP) {{RFC2205}} to signal  QoS  reservations across network paths.  Every router in the network that participates in IntServ maintains per-flow soft-state to a) perform call admission control and b) deliver guaranteed service.
 
 Applications use Flow Specification (Flow Specs) {{RFC2210}} to describe the traffic that they emit. RSVP reserves capacity for traffic on a per Flow Spec basis.
 
@@ -565,19 +588,19 @@ Applications use Flow Specification (Flow Specs) {{RFC2210}} to describe the tra
 
 Although IntServ has been used in enterprise and government networks, IntServ was never widely deployed on the Internet because of its cost. The following factors contributed to operational cost:
 
-- IntServ must be deployed on every router that is on a path where IntServ is to be used
+- IntServ must be deployed on every router that is on a path where IntServ is to be used. Although it is possible to include a router that does not participate in IntServ along the path being controlled, if that router is likely to become a bottleneck, IntServ cannot be used to avoid that bottleneck along the path
 - IntServ maintained per flow state
 
 As IntServ was being discussed, the following occurred:
 
-- For many expected uses, it became more cost effective to solve the QoS problem by adding bandwidth. Between 1994 and 2000, Internet Service Providers upgraded their infrastructures from DS3 (45 Mbps) to OC-48 (2.4 Gbps). This meant that even if an endpoint was using IntServ in an IntServ-enabled network, its requests would never be denied, so endpoints and Internet Service Providers had little reason to enable IntServ. 
+- For many expected uses, it became more cost effective to solve the QoS problem by adding bandwidth. Between 1994 and 2000, Internet Service Providers upgraded their infrastructures from DS3 (45 Mbps) to OC-48 (2.4 Gbps). This meant that even if an endpoint was using IntServ in an IntServ-enabled network, its requests would rarely, if ever, be denied, so endpoints and Internet Service Providers had little reason to enable IntServ. 
 - DiffServ {{RFC2475}} offered a more cost-effective, albeit less fine-grained, solution to the QoS problem.
 
 ### Lessons Learned.
 
 The following lessons were learned:
 
-- Any mechanism that requires every onpath router to maintain per-flow state is not likely to succeed, unless the additional cost for offering the feature can be recovered from the user.
+- Any mechanism that requires every participating onpath router to maintain per-flow state is not likely to succeed, unless the additional cost for offering the feature can be recovered from the user.
 - Any mechanism that requires an operator to upgrade all of its routers is not likely to succeed, unless the additional cost for offering the feature can be recovered from the user.
 
 In environments where IntServ has been deployed, trust relationships with endpoints are very different from trust relationships on the Internet itself, and there are often clearly-defined hierarchies in Service Level Agreements (SLAs), and well-defined transport flows operating with pre-determined capacity and latency requirements over paths where capacity or other attributes are constrained. 
@@ -885,7 +908,8 @@ Our thanks to C.M. Heard, David Black, Gorry Fairhurst, Joe Touch, Joeri de Ruit
 
 Mallory Knodel reviewed this document for the Internet Engineering Steering Group, and provided many helpful suggestions. 
 
+David Oran also provided helpful comments and text suggestions on this document during Internet Engineering Steering Group balloting. In particular, {{Futures}} reflects his review. 
+
 Special thanks to Adrian Farrel for helping Spencer navigate the twisty little passages of Flow Specs and Filter Specs in IntServ, RSVP, MPLS, and BGP. They are all alike, except when they are different {{Colossal-Cave}}.
 
 --- back
-
