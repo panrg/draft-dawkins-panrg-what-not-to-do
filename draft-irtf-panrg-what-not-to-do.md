@@ -1,7 +1,7 @@
 ---
 title: "Path Aware Networking: Obstacles to Deployment (A Bestiary of Roads Not Taken)"
 abbrev: What Not To Do
-docname: draft-irtf-panrg-what-not-to-do-15
+docname: draft-irtf-panrg-what-not-to-do-latest
 date: 
 category: info
 submissiontype: IRTF
@@ -552,7 +552,7 @@ The suggested references for Stream Transport are:
 
 The first version of Stream Transport, ST {{IEN-119}}, was published in the late 1970's and was implemented and deployed on the ARPANET at small scale. It was used throughout the 1980's for experimental transmission of voice, video, and distributed simulation. 
 
-The second version of the ST specification (ST2) {{RFC1190}} {{RFC1819}} was an experimental connection-oriented internetworking protocol that operated at the same layer as connectionless IP. ST2 packets could be distinguished by their IP header protocol numbers (IP, at that time, used protocol number 4, while ST2 used protocol number 5). 
+The second version of the ST specification (ST2) {{RFC1190}} {{RFC1819}} was an experimental connection-oriented internetworking protocol that operated at the same layer as connectionless IP. ST2 packets could be distinguished by their IP header version numbers (IP, at that time, used version number 4, while ST2 used version number 5).
 
 ST2 used a control plane layered over IP to select routes and reserve capacity for real-time streams across a network path, based on a flow specification communicated by a separate protocol. The flow specification could be associated with QoS state in routers, producing an experimental resource reservation protocol. This allowed ST2 routers along a path to offer end-to-end guarantees, primarily to satisfy the QoS requirements for realtime services over the Internet. 
 
@@ -904,7 +904,7 @@ Initial material for {{NSIS}} on Next Steps In Signaling (NSIS) was provided by 
 
 Initial material for {{FL}} on IPv6 Flow Labels was provided by Gorry Fairhurst. 
 
-Our thanks to C.M. Heard, David Black, Gorry Fairhurst, Joe Touch, Joeri de Ruiter, Mohamed Boucadair, Roland Bless, Ruediger Geib, Theresa Enghardt, and Wes Eddy, who provided review comments on previous versions.
+Our thanks to C.M. Heard, David Black, Erik Auerswald, Gorry Fairhurst, Joe Touch, Joeri de Ruiter, Mohamed Boucadair, Roland Bless, Ruediger Geib, Theresa Enghardt, and Wes Eddy, who provided review comments on previous versions.
 
 Mallory Knodel reviewed this document for the Internet Engineering Steering Group, and provided many helpful suggestions. 
 
