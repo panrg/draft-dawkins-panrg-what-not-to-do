@@ -47,6 +47,8 @@ informative:
   
   RFC1016:
 
+  RFC1122:
+
   RFC1190:
   
   RFC1633:
@@ -320,7 +322,25 @@ This document contains that catalog and analysis.
 
 This document describes the lessons that IETF participants have learned (and learned the hard way) about Path Aware Networking over a period of several decades, and provides an analysis of reasons why various Path Aware Networking techniques have seen limited or no deployment. 
 
-## What Does "Path Awareness" Mean in this Document? {#PANdef}
+## What Do "Path" and "Path Awareness" Mean in this Document? {#PANdef}
+
+The current definition of "Path" in the Path Aware Networking Research Group appears in Section 2 ("Terminology") in {{PathProp}}. That definition is included here as a convenience to the reader. 
+
+<blockquote>
+
+   Path:  A sequence of adjacent path elements over which a packet can
+      be transmitted, starting and ending with a node.  Paths are time-
+      dependent, i.e., the sequence of path elements over which packets
+      are sent from one node to another may change frequently.  A path
+      is defined between two nodes.  For multicast or broadcast, a
+      packet may be sent by one node and received by multiple nodes.  In
+      this case, the packet is sent over multiple paths at once, one
+      path for each combination of sending and receiving node.  Note
+      that an entity may have only partial visibility of the path
+      elements that comprise a path, and entities may treat path
+      elements at different levels of abstraction.
+
+</blockquote>
 
 The current definition of "Path Awareness", used by the Path Aware Networking Research Group, appears in Section 1.1 ("Definition") in {{I-D.irtf-panrg-questions}}. That definition is included here as a convenience to the reader. 
 
@@ -337,11 +357,13 @@ The current definition of "Path Awareness", used by the Path Aware Networking Re
    which enable this discovery and selection.
 </blockquote>
 
-Because this document reflects work performed over several decades, some technologies described in {{Contributions}} may not reflect the current definition, but these technologies were considered "path aware" by their contributors, so these contributions are included in this retrospective document. 
+Because this document reflects work performed over several decades, some technologies described in {{Contributions}} may not reflect the current definitions of "path" or "path aware", but these technologies were considered "path aware" by their contributors, so these contributions are included in this retrospective document. 
+
+It is worth noting that the definitions of "path" and "path aware" in {{PathProp}} would apply to path aware networking techniques at a number of levels of the Internet protocol architecture ({{RFC1122}}, plus several decades of refinements), but the contributions received for this document tended to target the Transport Layer, and to treat a "path" constructed by routers as a "black box". It would be useful to consider how applicable the Lessons Learned cataloged in this document are, at other layers, and that would be a fine topic for follow-on research.
 
 ## Note to RFC Editor
 
-If the "Definition" in Section 1.1 ("Definition") of {{I-D.irtf-panrg-questions}} changes, the text in {{PANdef}} of this document should be should be changed as well. 
+If the definition of "Path" in Section 2 ("Terminology") of {{PathProp}} or the definition of "Path Aware" in Section 1.1 ("Definition") of {{I-D.irtf-panrg-questions}} changes, the corresponding text in {{PANdef}} of this document should be should be changed as well. 
 
 Whether that happens or not, the RFC Editor is requested to remove this section. 
 
@@ -723,15 +745,19 @@ Shim6, as defined in {{RFC5533}} and related RFCs, provided a workable solution 
 
 ### Reasons for Non-deployment
 
-Note that the problem being addressed was "site multihoming", but Shim6 was providing "host multihoming". That meant that the decision about what path would be used was under host control, not under router control. 
+Note that the problem being addressed was "site multihoming", but Shim6 was providing "host multihoming". That meant that the decision about what path would be used was under host control, not under edge router control. 
 
 Although more work could have been done to provide a better technical solution, the biggest impediments to Shim6 deployment were operational and business considerations. These impediments were discussed at multiple network operator group meetings, including {{Shim6-35}} at {{NANOG-35}}.
 
-The technique issues centered around concerns that Shim6 relied on the host to track all the connections, while also tracking Identity/Locator mappings in the kernel, and tracking failures to recognize that a backup path has failed.
+The technical issues centered around concerns that Shim6 relied on the host to track all the connections, while also tracking Identity/Locator mappings in the kernel, and tracking failures to recognize that an available path has failed.
 
-The operator issues centered around concerns that operators were performing traffic engineering, but would have no visibility or control over hosts when they chose to begin using another path, and relying on hosts to engineer traffic exposed their networks to oscillation based on feedback loops, as hosts move from path to path. At a minimum, traffic engineering policies must be pushed down to individual hosts. In addition, firewalls that expected to find a transport-level protocol header in the IP payload, would see a Shim6 Identity header, and be unable to perform transport-protocol-based firewalling functions because its normal processing logic would not look past the Identity header. 
+The operational issues centered around concerns that operators were performing traffic engineering on traffic aggregates. With Shim6, these operator traffic engineering policies must be pushed down to individual hosts. 
 
-The business issues centered removing or reducing the ability to sell BGP multihoming service, which is often more expensive than single-homed connectivity. 
+In addition, operators would have no visibility or control over the decision of hosts choosing to switch to another path. They expressed concerns that relying on hosts to steer traffic exposed operator networks to oscillation based on feedback loops, if hosts moved from path to path frequently. Given that Shim6 was intended to support multihoming across operators, operators providing only one of the paths would have even less visibility as traffic suddenly appeared and disappeared on their networks.  
+
+In addition, firewalls that expected to find a TCP or UDP transport-level protocol header in the IP payload would see a Shim6 Identity header instead, and would not perform transport-protocol-based firewalling functions because the firewall's normal processing logic would not look past the Identity header. 
+
+The business issues centered on reducing or removing the ability to sell BGP multihoming service to their own customers, which is often more expensive than two single-homed connectivity services. 
 
 ### Lessons Learned
 
@@ -904,11 +930,13 @@ Initial material for {{NSIS}} on Next Steps In Signaling (NSIS) was provided by 
 
 Initial material for {{FL}} on IPv6 Flow Labels was provided by Gorry Fairhurst. 
 
-Our thanks to C.M. Heard, David Black, Erik Auerswald, Gorry Fairhurst, Joe Touch, Joeri de Ruiter, Mohamed Boucadair, Roland Bless, Ruediger Geib, Theresa Enghardt, and Wes Eddy, who provided review comments on previous versions.
+Our thanks to Adrian Farrel, C.M. Heard, David Black, Erik Auerswald, Gorry Fairhurst, Joe Touch, Joeri de Ruiter, Mohamed Boucadair, Roland Bless, Ruediger Geib, Theresa Enghardt, and Wes Eddy, who provided review comments on this document as a "work in process".
 
-Mallory Knodel reviewed this document for the Internet Engineering Steering Group, and provided many helpful suggestions. 
+Mallory Knodel reviewed this document for the Internet Research Steering Group, and provided many helpful suggestions. 
 
-David Oran also provided helpful comments and text suggestions on this document during Internet Engineering Steering Group balloting. In particular, {{Futures}} reflects his review. 
+David Oran also provided helpful comments and text suggestions on this document during Internet Research Steering Group balloting. In particular, {{Futures}} reflects his review. 
+
+Benjamin Kaduk and Rob Wilton provided helpful comments during Internet Engineering Steering Group conflict review. 
 
 Special thanks to Adrian Farrel for helping Spencer navigate the twisty little passages of Flow Specs and Filter Specs in IntServ, RSVP, MPLS, and BGP. They are all alike, except when they are different {{Colossal-Cave}}.
 
