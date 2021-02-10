@@ -34,6 +34,8 @@ author:
 informative:
 
   I-D.irtf-panrg-questions:
+
+  I-D.irtf-panrg-path-properties:
   
   I-D.ietf-tsvwg-intserv-multiple-tspec:
 
@@ -214,18 +216,6 @@ informative:
     target: https://irtf.org/panrg
     title: "Path Aware Networking Research Group (Home Page)"
 
-  PathProp: 
-    title: "A Vocabulary of Path Properties" 
-    target: https://tools.ietf.org/html/draft-enghardt-panrg-path-properties-03
-    author: 
-      - 
-        name: Theresa Enghardt
-        ins: T. Enghardt
-      - 
-        name: Cyrill Kraehenbuehl
-        ins: C. Kraehenbuehl   
-    date: November 2019
-
   QS-SAT:
     target: https://dl.acm.org/citation.cfm?id=3160304.3160305
     title: "Using Quick-Start to enhance TCP-friendly rate control performance in bidirectional satellite networks"
@@ -324,7 +314,13 @@ This document describes the lessons that IETF participants have learned (and lea
 
 ## What Do "Path" and "Path Awareness" Mean in this Document? {#PANdef}
 
-The current definition of "Path" in the Path Aware Networking Research Group appears in Section 2 ("Terminology") in {{PathProp}}. That definition is included here as a convenience to the reader. 
+One of the first questions reviewers of this document have asked is "what's the definition of a path, and what's the definition of path awareness?" That is not an easy question to answer for this document. 
+
+These terms have definitions in other {{PANRG}} documents, and are still the subject of some discussion in the research group, as of the date of this document. But because this document reflects work performed over several decades, the technologies described in {{Contributions}} significantly predate the current definitions of "path" and "path aware" in use in the Path Aware Networking Research Group, and it is unlikely that all the contributors to {{Contributions}} would have had the same understanding of these terms. Those technologies were considered "path aware" in early PANRG discussions, and so are included in this retrospective document. 
+
+It is worth noting that the definitions of "path" and "path aware" in {{I-D.irtf-panrg-path-properties}} would apply to path aware networking techniques at a number of levels of the Internet protocol architecture ({{RFC1122}}, plus several decades of refinements), but the contributions received for this document tended to target the Transport Layer, and to treat a "path" constructed by routers as a "black box". It would be useful to consider how applicable the Lessons Learned cataloged in this document are, at other layers, and that would be a fine topic for follow-on research.
+
+The current definition of "Path" in the Path Aware Networking Research Group appears in Section 2 ("Terminology") in {{I-D.irtf-panrg-path-properties}}. That definition is included here as a convenience to the reader. 
 
 <blockquote>
 
@@ -358,16 +354,6 @@ The current definition of "Path Awareness", used by the Path Aware Networking Re
    supported, regardless of the specific design of the protocol features
    which enable this discovery and selection.
 </blockquote>
-
-Because this document reflects work performed over several decades, some technologies described in {{Contributions}} may not reflect the current definitions of "path" or "path aware", but these technologies were considered "path aware" by their contributors, so these contributions are included in this retrospective document. 
-
-It is worth noting that the definitions of "path" and "path aware" in {{PathProp}} would apply to path aware networking techniques at a number of levels of the Internet protocol architecture ({{RFC1122}}, plus several decades of refinements), but the contributions received for this document tended to target the Transport Layer, and to treat a "path" constructed by routers as a "black box". It would be useful to consider how applicable the Lessons Learned cataloged in this document are, at other layers, and that would be a fine topic for follow-on research.
-
-## Note to RFC Editor
-
-If the definition of "Path" in Section 2 ("Terminology") of {{PathProp}} or the definition of "Path Aware" in Section 1.1 ("Definition") of {{I-D.irtf-panrg-questions}} changes, the corresponding text in {{PANdef}} of this document should be should be changed as well. 
-
-Whether that happens or not, the RFC Editor is requested to remove this section. 
 
 # A Perspective On This Document {#perspective}
 
@@ -419,7 +405,7 @@ Several of the Lessons Learned in {{LessonsLearned}} reflect considerations desc
 
 ## Terminology Used in this Document
 
-The terms Node and Element in this document have the meaning defined in {{PathProp}}. 
+The terms Node and Element in this document have the meaning defined in {{I-D.irtf-panrg-path-properties}}. 
 
 ## Methodology for Contributions {#TemplateContributions}
 
