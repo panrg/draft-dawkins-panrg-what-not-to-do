@@ -329,16 +329,18 @@ The current definition of "Path" in the Path Aware Networking Research Group app
 <blockquote>
 
    Path:  A sequence of adjacent path elements over which a packet can
-      be transmitted, starting and ending with a node.  Paths are time-
-      dependent, i.e., the sequence of path elements over which packets
-      are sent from one node to another may change frequently.  A path
-      is defined between two nodes.  For multicast or broadcast, a
-      packet may be sent by one node and received by multiple nodes.  In
-      this case, the packet is sent over multiple paths at once, one
-      path for each combination of sending and receiving node.  Note
-      that an entity may have only partial visibility of the path
-      elements that comprise a path, and entities may treat path
-      elements at different levels of abstraction.
+      be transmitted, starting and ending with a node.  A path is
+      unidirectional.  Paths are time-dependent, i.e., the sequence of
+      path elements over which packets are sent from one node to another
+      may change.  A path is defined between two nodes.  For multicast
+      or broadcast, a packet may be sent by one node and received by
+      multiple nodes.  In this case, the packet is sent over multiple
+      paths at once, one path for each combination of sending and
+      receiving node; these paths do not have to be disjoint.  Note that
+      an entity may have only partial visibility of the path elements
+      that comprise a path and visibility may change over time.
+      Different entities may have different visibility of a path and/or
+      treat path elements at different levels of abstraction.
 
 </blockquote>
 
