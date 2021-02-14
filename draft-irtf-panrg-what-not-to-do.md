@@ -937,7 +937,7 @@ The suggested references for Explicit Congestion Notification (ECN) are:
 
 In the early 1990s, the large marjority of Internet traffic used TCP as its transport protocol, but TCP had no way to detect path congestion before the path was so congested that packets were being dropped, and these congestion events could affect all senders using a path, either by "lockout", where long-lived flows monopolized the queues along a path, or by "full queues", where queues remain full, or almost full, for a long period of time.
 
-In response to this situation, "Active Queue Management" (AQM) was deployed in the network. A number of AQM disciplines have been deployed, but one common approach was that routers dropped packets when a threshold buffer length was reached, so that transport protocols like TCP that were responsive to loss would detect this loss and reduce their sending rates. Random Early Detection (RED) was one such proposal in the IETF. As the name suggests, a router using RED as its AQM discipline that detected time-averaged queue lengths passing a threshold would choose incoming packets probablistically to be dropped {{RFC2309}}.
+In response to this situation, "Active Queue Management" (AQM) was deployed in the network. A number of AQM disciplines have been deployed, but one common approach was that routers dropped packets when a threshold buffer length was reached, so that transport protocols like TCP that were responsive to loss would detect this loss and reduce their sending rates. Random Early Detection (RED) was one such proposal in the IETF. As the name suggests, a router using RED as its AQM discipline that detected time-averaged queue lengths passing a threshold would choose incoming packets probabilistically to be dropped {{RFC2309}}.
 
 Researchers suggested that providing "explicit congestion notifications" to senders when routers along the path detected their queues were building, giving them an indication that router queues along the path were building, so that some senders would "slow down" as if a loss had occurred, so that the path queues had time to drain, and the path still had sufficient buffer capacity to accommodate bursty arrivals of packets from other senders. This was proposed as an Experiment in {{RFC2481}}, and standardized in {{RFC3168}}.
 
@@ -951,7 +951,7 @@ A key aspect of ECN was the use of IP header fields rather than IP options to ca
 
 The proponents of ECN did so much right, anticipating many of the Lessons Learned now recognized in {{LessonsLearned}}. They recognized the need to support incremental deployment ({{EarlyAdopters}}). They considered the impact on router throughput ({{Fast-paths}}). They even considered trust issues between end nodes and the network, both for non-compliant end nodes ({{IDsTrustingEndpoints}}) and non-compliant routers ({{EndpointsTrustingIDs}}). 
 
-They were rewarded with ECN being implemented in major operating systems, both for end nodes and for routers. A number of implementations are listed under "Implementation and Deploymwnt of ECN" at {{SallyFloyd}}.
+They were rewarded with ECN being implemented in major operating systems, both for end nodes and for routers. A number of implementations are listed under "Implementation and Deployment of ECN" at {{SallyFloyd}}.
 
 What they did not anticipate, was routers that would crash, when they saw bits 6 and 7 in the IPv4 TOS octet {{RFC0791}}/IPv6 Traffic Class field {{RFC2460}}, which {{RFC2481}} redefined to be "currently unused", being set to a non-zero value.
 
@@ -961,7 +961,7 @@ As described in {{vista-impl}},
 When a data packet arrives with either ECT(0) or ECT(1) (indicating successful ECN capability negotiation) indicated, router crashed.
 Cannot be recovered at TCP layer
 
-This implementation, which would be run on a significant percentage of Internet end nodes, was shipped with ECN disabled, as was true for several of the other implementations listed under "Implementation and Deploymwnt of ECN" at {{SallyFloyd}}. Even if subsequent router vendors fixed these implementations, ECN was still disabled on end nodes, and given the tradeoff between the benefits of enabling ECN (somewhat better behavior during congestion) and the risks of enabling ECN (possibly crashing a router somewhere along the path), ECN tended to stay disabled on implementations that supported ECN for decades afterwards. 
+This implementation, which would be run on a significant percentage of Internet end nodes, was shipped with ECN disabled, as was true for several of the other implementations listed under "Implementation and Deployment of ECN" at {{SallyFloyd}}. Even if subsequent router vendors fixed these implementations, ECN was still disabled on end nodes, and given the tradeoff between the benefits of enabling ECN (somewhat better behavior during congestion) and the risks of enabling ECN (possibly crashing a router somewhere along the path), ECN tended to stay disabled on implementations that supported ECN for decades afterwards. 
 
 ### Lessons Learned
 
