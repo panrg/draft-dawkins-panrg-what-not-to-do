@@ -43,6 +43,8 @@ informative:
 
   I-D.farrell-etm:
 
+  RFC0791:
+
   RFC0792:
   
   RFC0793:
@@ -72,6 +74,12 @@ informative:
   RFC2212:
   
   RFC2215:
+
+  RFC2309:
+
+  RFC2481:
+
+  RFC2460:
   
   RFC2475:
 
@@ -262,6 +270,13 @@ informative:
       "Computer Networking": "Volume 51, Number 7"
     date: May 2007
 
+  SallyFloyd:
+    author:
+      name: Sally Floyd
+      ins: S. Floyd
+    target: https://www.icir.org/floyd/ecn.html
+    title: "ECN (Explicit Congestion Notification) in TCP/IP"
+
   Sch11:
     author: 
       name: M. Scharf
@@ -299,6 +314,21 @@ informative:
   TRIGTRAN-56:
     target: https://www.ietf.org/proceedings/56/251.htm 
     title: "Triggers for Transport BOF at IETF 56"
+    date: November 2003
+
+  vista-impl:
+    author:
+      - 
+        name: Murari Sridharan
+        ins: M. Sridharan
+      - 
+        name: Deepak Bansal
+        ins: D. Bansal
+      -
+        name: Dave Thaler
+        ins: D. Thaler
+    target: https://www.ietf.org/proceedings/68/slides/tsvarea-3/sld1.htm
+    title: "Implementation Report on Experiences with Various TCP RFCs"
     date: November 2003
  
 --- abstract
@@ -442,9 +472,10 @@ The PANRG Research Group reviewed the Lessons Learned ({{LessonsLearned}}) conta
 | Intermediate Nodes Trusting Endpoints ({{IDsTrustingEndpoints}}) | Not Now |
 | Reacting to Distant Signals ({{ReactionTimes}}) | Variable |
 | Support in Endpoint Protocol Stacks ({{ProtocolStackSupport}}) | Variable |
+| One Chance to Achieve Deployment ({{OneChance}}) | Invariant |
 {: #thefuture}
 
-"Justifying Deployment", "Providing Benefits for Early Adopters", "Paying for Path Aware Techniques", and "Impact on Operational Practice" were considered to be invariant - the sense of the room was that these would always be considerations for any proposed Path Aware Technique. 
+"Justifying Deployment", "Providing Benefits for Early Adopters", "Paying for Path Aware Techniques", "Impact on Operational Practice", and "One Chance to Achieve Deployment" were considered to be invariant - the sense of the room was that these would always be considerations for any proposed Path Aware Technique. 
 
 "Providing Benefits During Partial Deployment" was added after IETF 105, during research group last call, and is also considered to be invariant. 
 
@@ -529,6 +560,10 @@ Because the Internet is a distributed system, if the distance that information f
 ## Support in Endpoint Protocol Stacks {#ProtocolStackSupport}
 
 Just because a protocol stack provides a new feature/signal does not mean that applications will use the feature/signal. Protocol stacks may not know how to effectively utilize Path-Aware techniques, because the protocol stack may require information from applications to permit the technique to work effectively, but applications may not a-priori know that information. Even if the application does know that information, the de-facto sockets API has no way of signaling application expectations for the network path to the protocol stack. In order for applications to provide these expectations to protocol stacks, we need an API that signals more than the packets to be sent. (See {{ST2}} and {{IntServ}}).
+
+## Ability to Recover From Missteps {#OneChance}
+
+If early implementers discover problems with a new feature, that feature is likely to be disabled, and convincing implementers to re-enable that feature can be very difficult, and can require years or decades. (See {{ecn}}).
 
 # Future Work {#Futures}
 
@@ -890,6 +925,54 @@ Although {{RFC6437}} recommended that endpoints should by default choose uniform
 
 A growth in the use of encrypted transports, (e.g. QUIC {{QUIC-WG}}) seems likely to raise similar issues to those discussed above and could motivate renewed interest in utilizing the flow label.
 
+## Explicit Congestion Notification (ECN) {#ecn}
+
+The suggested references for Explicit Congestion Notification (ECN) are:
+
+- Recommendations on Queue Management and Congestion Avoidance in the Internet {{RFC2309}}
+- A Proposal to add Explicit Congestion Notification (ECN) to IP {{RFC2481}}
+- The Addition of Explicit Congestion Notification (ECN) to IP {{RFC3168}}
+- Implementation Report on Experiences with Various TCP RFCs {{vista-impl}}, slides 6 and 7
+- Implementation and Deployment of ECN {{SallyFloyd}}
+
+In the early 1990s, the large majority of Internet traffic used TCP as its transport protocol, but TCP had no way to detect path congestion before the path was so congested that packets were being dropped, and these congestion events could affect all senders using a path, either by "lockout", where long-lived flows monopolized the queues along a path, or by "full queues", where queues remain full, or almost full, for a long period of time.
+
+In response to this situation, "Active Queue Management" (AQM) was deployed in the network. A number of AQM disciplines have been deployed, but one common approach was that routers dropped packets when a threshold buffer length was reached, so that transport protocols like TCP that were responsive to loss would detect this loss and reduce their sending rates. Random Early Detection (RED) was one such proposal in the IETF. As the name suggests, a router using RED as its AQM discipline that detected time-averaged queue lengths passing a threshold would choose incoming packets probabilistically to be dropped {{RFC2309}}.
+In response to this situation, "Active Queue Management" (AQM) was deployed in the network. A number of AQM disciplines have been deployed, but one common approach was that routers dropped packets when a threshold buffer length was reached, so that transport protocols like TCP that were responsive to loss would detect this loss and reduce their sending rates. Random Early Detection (RED) was one such proposal in the IETF. As the name suggests, a router using RED as its AQM discipline that detected time-averaged queue lengths passing a threshold would choose incoming packets probabilistically to be dropped {{RFC2309}}.
+
+Researchers suggested that providing "explicit congestion notifications" to senders when routers along the path detected their queues were building, so that some senders would "slow down" as if a loss had occurred, so that the path queues had time to drain, and the path still had sufficient buffer capacity to accommodate bursty arrivals of packets from other senders. This was proposed as an Experiment in {{RFC2481}}, and standardized in {{RFC3168}}.
+
+A key aspect of ECN was the use of IP header fields rather than IP options to carry explicit congestion notifications, since the proponents recognized that 
+
+> Many routers process the "regular" headers in IP packets more 
+  efficiently than they process the header information in IP
+  options.
+
+### Reasons for Non-deployment
+
+The proponents of ECN did so much right, anticipating many of the Lessons Learned now recognized in {{LessonsLearned}}. They recognized the need to support incremental deployment ({{EarlyAdopters}}). They considered the impact on router throughput ({{Fast-paths}}). They even considered trust issues between end nodes and the network, both for non-compliant end nodes ({{IDsTrustingEndpoints}}) and non-compliant routers ({{EndpointsTrustingIDs}}). 
+
+They were rewarded with ECN being implemented in major operating systems, both for end nodes and for routers. A number of implementations are listed under "Implementation and Deployment of ECN" at {{SallyFloyd}}.
+
+What they did not anticipate, was routers that would crash, when they saw bits 6 and 7 in the IPv4 TOS octet {{RFC0791}}/IPv6 Traffic Class field {{RFC2460}}, which {{RFC2481}} redefined to be "currently unused", being set to a non-zero value.
+
+As described in {{vista-impl}}, 
+
+> Intermediate Gateway Device problem #1: one of the most popular versions from one of the most popular vendors.
+When a data packet arrives with either ECT(0) or ECT(1) (indicating successful ECN capability negotiation) indicated, router crashed.
+Cannot be recovered at TCP layer
+
+This implementation, which would be run on a significant percentage of Internet end nodes, was shipped with ECN disabled, as was true for several of the other implementations listed under "Implementation and Deployment of ECN" at {{SallyFloyd}}. Even if subsequent router vendors fixed these implementations, ECN was still disabled on end nodes, and given the tradeoff between the benefits of enabling ECN (somewhat better behavior during congestion) and the risks of enabling ECN (possibly crashing a router somewhere along the path), ECN tended to stay disabled on implementations that supported ECN for decades afterwards. 
+
+### Lessons Learned
+
+Of the contributions included in {{Contributions}}, ECN may be unique in providing these lessons:
+
+- Even if you do everything right, you may trip over implementation bugs in devices you know nothing about, that will cause severe problems that prevent successful deployment of your path aware technology.
+- After implementations disable your path aware technology, it may take years, or even decades, to convince implementers to re-enable it by default. 
+
+These two lessons, taken together, could be summarized as "you get one chance to get it right". 
+
 # Security Considerations
 
 This document describes Path Aware techniques that were not adopted and widely deployed on the Internet, so it doesn't affect the security of the Internet. 
@@ -917,6 +1000,8 @@ Initial material for {{TRIGTRAN}} on Triggers for Transport (TRIGTRAN) was provi
 Initial material for {{NSIS}} on Next Steps In Signaling (NSIS) was provided by Roland Bless and Martin Stiemerling.
 
 Initial material for {{FL}} on IPv6 Flow Labels was provided by Gorry Fairhurst. 
+
+Initial material for {{ecn}} on Explicit Congestion Notification was provided by Spencer Dawkins. 
 
 Our thanks to Adrian Farrel, C.M. Heard, David Black, Erik Auerswald, Gorry Fairhurst, Joe Touch, Joeri de Ruiter, Mohamed Boucadair, Roland Bless, Ruediger Geib, Theresa Enghardt, and Wes Eddy, who provided review comments on this document as a "work in process".
 
