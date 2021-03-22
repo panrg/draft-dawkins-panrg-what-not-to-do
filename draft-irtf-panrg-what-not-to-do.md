@@ -1,7 +1,7 @@
 ---
 title: "Path Aware Networking: Obstacles to Deployment (A Bestiary of Roads Not Taken)"
 abbrev: What Not To Do
-docname: draft-irtf-panrg-what-not-to-do-latest
+docname: draft-irtf-panrg-what-not-to-do-19
 date: 
 category: info
 submissiontype: IRTF
@@ -28,6 +28,7 @@ author:
     ins: S. Dawkins
     name: Spencer Dawkins
     organization: Tencent America 
+    country: United States of America
     email: spencerdawkins.ietf@gmail.com
     role: editor
 
@@ -211,6 +212,11 @@ informative:
     target: https://datatracker.ietf.org/doc/minutes-106-panrg/
     title: "Path Aware Networking Research Group - IETF-106 Minutes"
     date: November 2019
+
+  PANRG-110:
+    target: https://datatracker.ietf.org/meeting/110/sessions/panrg
+    title: "Path Aware Networking Research Group - IETF-110"
+    date: July 2017
 
   PATH-Decade:
     target: https://datatracker.ietf.org/doc/slides-99-panrg-a-decade-of-path-awareness/
@@ -453,11 +459,13 @@ There are many things that could be said about the Path Aware networking techniq
 
 The initial scope for this document was roughly "what mistakes have we made in the decade prior to {{PANRG-99}}, that we shouldn't make again". Some of the contributions in {{Contributions}} predate the initial scope. The earliest Path-Aware Networking technique referred to in {{Contributions}} is {{ST2}}, published in the late 1970s. Given that the networking ecosystem has evolved continuously, it seems reasonable to consider how to apply these lessons.
 
-The PANRG Research Group reviewed the Lessons Learned ({{LessonsLearned}}) contained in the May 23, 2019 version of this document at IETF 105 {{PANRG-105-Min}}, and carried out additional discussion at IETF 106 {{PANRG-106-Min}}. {{thefuture}} provides the "sense of the room" about each lesson after those discussions. The intention is to capture whether a specific lesson seems to be 
+The PANRG Research Group reviewed the Lessons Learned ({{LessonsLearned}}) contained in the May 23, 2019 version of this document at IETF 105 {{PANRG-105-Min}}, and carried out additional discussion at IETF 106 {{PANRG-106-Min}}. {{thefuture}} provides the "sense of the room" about each lesson after those discussions. The intention was to capture whether a specific lesson seems to be 
 
 + "Invariant" - well-understood and is likely to be applicable for any proposed Path Aware Networking solution.
 + "Variable" - has impeded deployment in the past, but might not be applicable in a specific technique. Engineering analysis to understand whether the lesson is applicable is prudent.
 + "Not Now" - this characteristic tends to turn up a minefield full of dragons, and prudent network engineers will wish to avoid gambling on a technique that relies on this, until something significant changes
+
+{{ecn}} on ECN was added during the review and approval process, based on a question from Martin Duke. That section, along with its Lessons Learned and place in the "Invariant"/"Variable"/Not Now" taxonomy, as contained in the March 8, 2021 version of this document, was discussed at {{PANRG-110}}.
 
 | Lesson | Category |
 | Justifying Deployment ({{JustifyingDeployment}}) | Invariant |
@@ -472,10 +480,10 @@ The PANRG Research Group reviewed the Lessons Learned ({{LessonsLearned}}) conta
 | Intermediate Nodes Trusting Endpoints ({{IDsTrustingEndpoints}}) | Not Now |
 | Reacting to Distant Signals ({{ReactionTimes}}) | Variable |
 | Support in Endpoint Protocol Stacks ({{ProtocolStackSupport}}) | Variable |
-| One Chance to Achieve Deployment ({{OneChance}}) | Invariant |
+| Planning for Failure ({{OneChance}}) | Invariant |
 {: #thefuture}
 
-"Justifying Deployment", "Providing Benefits for Early Adopters", "Paying for Path Aware Techniques", "Impact on Operational Practice", and "One Chance to Achieve Deployment" were considered to be invariant - the sense of the room was that these would always be considerations for any proposed Path Aware Technique. 
+"Justifying Deployment", "Providing Benefits for Early Adopters", "Paying for Path Aware Techniques", "Impact on Operational Practice", and "Planning for Failure" were considered to be invariant - the sense of the room was that these would always be considerations for any proposed Path Aware Technique. 
 
 "Providing Benefits During Partial Deployment" was added after IETF 105, during research group last call, and is also considered to be invariant. 
 
@@ -515,7 +523,7 @@ It is useful to notice that sometimes an obstacle might impede deployment, while
 
 ## Justifying Deployment {#JustifyingDeployment}
 
-The benefit of Path Awareness must be great enough to justify making changes in an operational network. The colloquial U.S. American English expression, "If it ain't broke, don't fix it" is a "best current practice" on today's Internet. (See {{Quick-Start}}, {{TRIGTRAN}}, and {{Source-Quench}}, in addition to {{RFC5218}}).
+The benefit of Path Awareness must be great enough to justify making changes in an operational network. The colloquial U.S. American English expression, "If it ain't broke, don't fix it" is a "best current practice" on today's Internet. (See {{Quick-Start}}, {{Source-Quench}}, {{TRIGTRAN}}, and {{ecn}}, in addition to {{RFC5218}}).
 
 ## Providing Benefits for Early Adopters {#EarlyAdopters}
 
@@ -523,15 +531,15 @@ Providing benefits for early adopters can be key - if everyone must deploy a tec
 
 ## Providing Benefits During Partial Deployment {#PartialDeployment}
 
-Some proposals require that all path elements along the full length of the path must be upgraded to support a new technique, before any benefits can be seen. This is likely to require coordination between operators who control a subset of path elements, and between operators and end users if endpoint upgrades are required. If a technique provides benefits when only a part of the path has been upgraded, this is likely to encourage adoption and deployment. (See {{IntServ}} and {{Quick-Start}}, in addition to {{RFC5218}}). 
+Some proposals require that all path elements along the full length of the path must be upgraded to support a new technique, before any benefits can be seen. This is likely to require coordination between operators who control a subset of path elements, and between operators and end users if endpoint upgrades are required. If a technique provides benefits when only a part of the path has been upgraded, this is likely to encourage adoption and deployment. (See {{IntServ}}, {{Quick-Start}}, and {{ecn}}, in addition to {{RFC5218}}). 
 
 ## Outperforming End-to-end Protocol Mechanisms {#Outperforming}
 
-Adaptive end-to-end protocol mechanisms may respond to feedback quickly enough that the additional realizable benefit from a new Path Aware mechanism that tries to manipulate nodes along a path, or observe the attributes of nodes along a path, may be much smaller than anticipated ({{Quick-Start}} and {{TRIGTRAN}}). 
+Adaptive end-to-end protocol mechanisms may respond to feedback quickly enough that the additional realizable benefit from a new Path Aware mechanism that tries to manipulate nodes along a path, or observe the attributes of nodes along a path, may be much smaller than anticipated (See {{Quick-Start}} and {{TRIGTRAN}}). 
 
 ## Paying for Path Aware Techniques {#Paying}
 
-"Follow the money." If operators can't charge for a Path Aware technique to recover the costs of deploying it, the benefits to the operator must be really significant. Corollary: If operators charge for a Path Aware technique, the benefits to users of that Path Aware technique must be significant enough to justify the cost. (See {{ST2}}, {{IntServ}}, and {{TRIGTRAN}}).
+"Follow the money." If operators can't charge for a Path Aware technique to recover the costs of deploying it, the benefits to the operator must be really significant. Corollary: If operators charge for a Path Aware technique, the benefits to users of that Path Aware technique must be significant enough to justify the cost. (See {{ST2}}, {{IntServ}}, {{TRIGTRAN}}, and {{ecn}}).
 
 ## Impact on Operational Practices {#OperationalImpact}
 
@@ -547,11 +555,11 @@ Many modern platforms, especially high-end routers, have been designed with hard
 
 ## Endpoints Trusting Intermediate Nodes {#EndpointsTrustingIDs}
 
-If intermediate nodes along the path can't be trusted, it's unlikely that endpoints will rely on signals from intermediate nodes to drive changes to endpoint behaviors. (See {{TRIGTRAN}}, {{Source-Quench}}). We note that "trust" is not binary - one, low, level of trust applies when a node issuing a message can confirm that it has visibility of the packets on the path it is seeking to control {{RFC8085}} (e.g., an ICMP message included a quoted packet from the source). A higher level of trust can arise when an endpoint has established a short term, or even long term, trust relationship with network nodes.
+If intermediate nodes along the path can't be trusted, it's unlikely that endpoints will rely on signals from intermediate nodes to drive changes to endpoint behaviors. We note that "trust" is not binary - one, low, level of trust applies when a node issuing a message can confirm that it has visibility of the packets on the path it is seeking to control {{RFC8085}} (e.g., an ICMP message included a quoted packet from the source). A higher level of trust can arise when an endpoint has established a short term, or even long term, trust relationship with network nodes. (See {{Source-Quench}} and {{TRIGTRAN}}). 
 
 ## Intermediate Nodes Trusting Endpoints {#IDsTrustingEndpoints}
 
-If the endpoints do not have any trust relationship with the intermediate nodes along a path, operators have been reluctant to deploy techniques that rely on endpoints sending unauthenticated control signals to routers. (See {{IntServ}} and {{NSIS}}. We also note this still remains a factor hindering deployment of DiffServ).
+If the endpoints do not have any trust relationship with the intermediate nodes along a path, operators have been reluctant to deploy techniques that rely on endpoints sending unauthenticated control signals to routers. (See {{IntServ}} and {{NSIS}}). (We also note this still remains a factor hindering deployment of DiffServ).
 
 ## Reacting to Distant Signals {#ReactionTimes}
 
@@ -561,9 +569,9 @@ Because the Internet is a distributed system, if the distance that information f
 
 Just because a protocol stack provides a new feature/signal does not mean that applications will use the feature/signal. Protocol stacks may not know how to effectively utilize Path-Aware techniques, because the protocol stack may require information from applications to permit the technique to work effectively, but applications may not a-priori know that information. Even if the application does know that information, the de-facto sockets API has no way of signaling application expectations for the network path to the protocol stack. In order for applications to provide these expectations to protocol stacks, we need an API that signals more than the packets to be sent. (See {{ST2}} and {{IntServ}}).
 
-## Ability to Recover From Missteps {#OneChance}
+## Planning For Failure {#OneChance}
 
-If early implementers discover problems with a new feature, that feature is likely to be disabled, and convincing implementers to re-enable that feature can be very difficult, and can require years or decades. (See {{ecn}}).
+If early implementers discover severe problems with a new feature, that feature is likely to be disabled, and convincing implementers to re-enable that feature can be very difficult, and can require years or decades. In addition to testing, partial deployment for a subset of users, implementing instrumentation that will detect degraded user experience, and even "failback" to a previous version or "failover" to an entirely different implementation are likely to be helpful. (See {{ecn}}).
 
 # Future Work {#Futures}
 
@@ -948,7 +956,11 @@ A key aspect of ECN was the use of IP header fields rather than IP options to ca
   efficiently than they process the header information in IP
   options.
 
+Unlike most of the Path Aware technologies included in this document, the story of ECN continues to the present day, and encountered a large number of Lessons Learned during that time. The early history of ECN (non-)deployment provides Lessons Learned that were not captured by other contributions in {{Contributions}}, so that is the emphasis in this section of the document.
+
 ### Reasons for Non-deployment
+
+There are at least three sub-stories - ECN deployment in clients, ECN deployment in routers, and AQM deployment in operational networks. All three sub-stories mattered. 
 
 The proponents of ECN did so much right, anticipating many of the Lessons Learned now recognized in {{LessonsLearned}}. They recognized the need to support incremental deployment ({{EarlyAdopters}}). They considered the impact on router throughput ({{Fast-paths}}). They even considered trust issues between end nodes and the network, both for non-compliant end nodes ({{IDsTrustingEndpoints}}) and non-compliant routers ({{EndpointsTrustingIDs}}). 
 
@@ -960,7 +972,7 @@ As described in {{vista-impl}},
 
 > Intermediate Gateway Device problem #1: one of the most popular versions from one of the most popular vendors.
 When a data packet arrives with either ECT(0) or ECT(1) (indicating successful ECN capability negotiation) indicated, router crashed.
-Cannot be recovered at TCP layer
+Cannot be recovered at TCP layer (sic)
 
 This implementation, which would be run on a significant percentage of Internet end nodes, was shipped with ECN disabled, as was true for several of the other implementations listed under "Implementation and Deployment of ECN" at {{SallyFloyd}}. Even if subsequent router vendors fixed these implementations, ECN was still disabled on end nodes, and given the tradeoff between the benefits of enabling ECN (somewhat better behavior during congestion) and the risks of enabling ECN (possibly crashing a router somewhere along the path), ECN tended to stay disabled on implementations that supported ECN for decades afterwards. 
 
@@ -969,9 +981,18 @@ This implementation, which would be run on a significant percentage of Internet 
 Of the contributions included in {{Contributions}}, ECN may be unique in providing these lessons:
 
 - Even if you do everything right, you may trip over implementation bugs in devices you know nothing about, that will cause severe problems that prevent successful deployment of your path aware technology.
-- After implementations disable your path aware technology, it may take years, or even decades, to convince implementers to re-enable it by default. 
+- After implementations disable your Path Aware technology, it may take years, or even decades, to convince implementers to re-enable it by default. 
 
 These two lessons, taken together, could be summarized as "you get one chance to get it right". 
+
+During discussion of ECN at {{PANRG-110}}, we noted that "you get one chance to get it right" isn't quite correct today, because so operating systems on so many host systems are frequently updated, which was not at all true in the early 2000s. We think that these restatements of the ECN Lessons Learned are more useful for current implementers: 
+
+- Even if you do everything right, you may trip over implementation bugs in devices you know nothing about, that will cause severe problems that prevent successful deployment of your path aware technology. Testing before deployment isn't enough to ensure successful deployment. It is also necessary to "deploy gently", which often means deploying for a small subset of users to gain experience, and implementing feedback mechanisms to detect that user experience is being degraded. 
+- After implementations disable your Path Aware technology, it may take years, or even decades, to convince implementers to re-enable it by default. This might be based on the difficulty of distributing implementations that enable it by default, but are just as likely to be based on the "bad taste in the mouth" that implementers have after an unsuccessful deployment attempt that degraded user experience. 
+
+With these expansions, the two lessons, taken together, could be more helpfully summarized as "plan for failure" - anticipate what your next step will be, if initial deployment is unsuccessful. 
+
+ECN deployment was also hindered by non-deployment of AQM in many devices, because of operator interest in QoS features provided in the network, rather than using the network to assist end systems in providing for themselves. But that's another story, and the AQM Lessons Learned are already covered in other contributions in {{Contributions}}.
 
 # Security Considerations
 
@@ -1003,7 +1024,7 @@ Initial material for {{FL}} on IPv6 Flow Labels was provided by Gorry Fairhurst.
 
 Initial material for {{ecn}} on Explicit Congestion Notification was provided by Spencer Dawkins. 
 
-Our thanks to Adrian Farrel, C.M. Heard, David Black, Erik Auerswald, Gorry Fairhurst, Joe Touch, Joeri de Ruiter, Mohamed Boucadair, Roland Bless, Ruediger Geib, Theresa Enghardt, and Wes Eddy, who provided review comments on this document as a "work in process".
+Our thanks to Adrian Farrel, Bob Briscoe, C.M. Heard, David Black, Eric Kinnear, Erik Auerswald, Gorry Fairhurst, Jake Holland, Joe Touch, Joeri de Ruiter, Kireeti Kompella, Mohamed Boucadair, Roland Bless, Ruediger Geib, Theresa Enghardt, and Wes Eddy, who provided review comments on this document as a "work in process".
 
 Mallory Knodel reviewed this document for the Internet Research Steering Group, and provided many helpful suggestions. 
 
