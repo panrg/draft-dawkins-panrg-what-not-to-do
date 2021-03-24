@@ -43,6 +43,8 @@ informative:
   I-D.arkko-arch-internet-threat-model:
 
   I-D.farrell-etm:
+ 
+  I-D.ietf-quic-transport:
 
   RFC0791:
 
@@ -465,7 +467,7 @@ The PANRG Research Group reviewed the Lessons Learned ({{LessonsLearned}}) conta
 + "Variable" - has impeded deployment in the past, but might not be applicable in a specific technique. Engineering analysis to understand whether the lesson is applicable is prudent.
 + "Not Now" - this characteristic tends to turn up a minefield full of dragons, and prudent network engineers will wish to avoid gambling on a technique that relies on this, until something significant changes
 
-{{ecn}} on ECN was added during the review and approval process, based on a question from Martin Duke. That section, along with its Lessons Learned and place in the "Invariant"/"Variable"/Not Now" taxonomy, as contained in the March 8, 2021 version of this document, was discussed at {{PANRG-110}}.
+{{ecn}} on ECN was added during the review and approval process, based on a question from Martin Duke. That section, along with its Lessons Learned and place in the "Invariant"/"Variable"/"Not Now" taxonomy, as contained in the March 8, 2021 version of this document, was discussed at {{PANRG-110}}.
 
 | Lesson | Category |
 | Justifying Deployment ({{JustifyingDeployment}}) | Invariant |
@@ -985,7 +987,9 @@ Of the contributions included in {{Contributions}}, ECN may be unique in providi
 
 These two lessons, taken together, could be summarized as "you get one chance to get it right". 
 
-During discussion of ECN at {{PANRG-110}}, we noted that "you get one chance to get it right" isn't quite correct today, because so operating systems on so many host systems are frequently updated, which was not at all true in the early 2000s. We think that these restatements of the ECN Lessons Learned are more useful for current implementers: 
+During discussion of ECN at {{PANRG-110}}, we noted that "you get one chance to get it right" isn't quite correct today, because operating systems on so many host systems are frequently updated, and transport protocols like QUIC {{I-D.ietf-quic-transport}} are being implemented in user space, and can be updated without touching installed operating systems. Neither of these factors were true in the early 2000s. 
+
+We think that these restatements of the ECN Lessons Learned are more useful for current implementers: 
 
 - Even if you do everything right, you may trip over implementation bugs in devices you know nothing about, that will cause severe problems that prevent successful deployment of your path aware technology. Testing before deployment isn't enough to ensure successful deployment. It is also necessary to "deploy gently", which often means deploying for a small subset of users to gain experience, and implementing feedback mechanisms to detect that user experience is being degraded. 
 - After implementations disable your Path Aware technology, it may take years, or even decades, to convince implementers to re-enable it by default. This might be based on the difficulty of distributing implementations that enable it by default, but are just as likely to be based on the "bad taste in the mouth" that implementers have after an unsuccessful deployment attempt that degraded user experience. 
